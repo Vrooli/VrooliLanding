@@ -1,0 +1,8 @@
+{
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "author": "Vrooli",
+    "license": "GPL-3.0"
+}
