@@ -4,7 +4,9 @@ echo 'Converting shared directory to javascript'
 cd ${PROJECT_DIR}/packages/shared
 yarn build
 
+echo 'Building ui'
 cd ${PROJECT_DIR}/packages/ui && PORT=${VIRTUAL_PORT}
+yarn build
 
-# Finally, start project
+echo 'Starting ui'
 yarn start-${NODE_ENV}
