@@ -5,7 +5,7 @@ import {
     Info as AboutIcon,
     PlayCircle as DevelopIcon,
 } from '@material-ui/icons';
-import { APP_LINKS, LANDING_LINKS, WEBSITE } from '@local/shared';
+import { APP_LINKS, APP_URL, LANDING_LINKS } from '@local/shared';
 import {
     Badge,
     BottomNavigationAction,
@@ -45,7 +45,7 @@ export function getUserActions({ exclude = [] }: GetUserActionsProps): Action[] 
         ['Home', ACTION_TAGS.Home, LANDING_LINKS.Home, null, HomeIcon, 0],
         ['Mission', ACTION_TAGS.Mission, LANDING_LINKS.Mission, null, MissionIcon, 0],
         ['About Us', ACTION_TAGS.About, LANDING_LINKS.About, null, AboutIcon, 0],
-        ['Start', ACTION_TAGS.Start, `app.${WEBSITE}${APP_LINKS.Start}`, null, DevelopIcon, 0],
+        ['Start', ACTION_TAGS.Start, `${APP_URL}${APP_LINKS.Start}`, null, DevelopIcon, 0],
     ];
 
     return actions.map(a => createAction(a)).filter(a => !exclude.includes(a.value));

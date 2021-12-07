@@ -1,7 +1,7 @@
 **Cookie Policy**
 *Last updated October 02, 2021*
 
-This Cookie Policy explains how <BUSINESS_NAME> ("**Company**", "**we**", "**us**", and "**our**") uses cookies and similar technologies to recognize you when you visit our websites at [<WEBSITE>](<WEBSITE>), ("**Websites**"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.
+This Cookie Policy explains how <BUSINESS_NAME> ("**Company**", "**we**", "**us**", and "**our**") uses cookies and similar technologies to recognize you when you visit our websites at [<APP_URL>](<APP_URL>), ("**Websites**"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.
 
 In some cases we may use cookies to collect personal information, or that becomes personal information if we combine it with other information.
 

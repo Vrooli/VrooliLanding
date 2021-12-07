@@ -1,4 +1,4 @@
-import { APP_LINKS, LANDING_LINKS, WEBSITE } from '@local/shared';
+import { APP_LINKS, APP_URL, LANDING_LINKS } from '@local/shared';
 import { makeStyles } from '@material-ui/styles';
 import { SvgIconTypeMap, useTheme } from '@material-ui/core';
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Tooltip, Theme } from '@material-ui/core';
@@ -63,7 +63,7 @@ export const Footer = () => {
                         <ListItemButton component="a" onClick={() => openLink(history, LANDING_LINKS.About)} >
                             <ListItemText primary="About Us" />
                         </ListItemButton>
-                        <ListItemButton component="a" onClick={() => openLink(history, `app.${WEBSITE}${APP_LINKS.Stats}`)} >
+                        <ListItemButton component="a" onClick={() => openLink(history, `${APP_URL}${APP_LINKS.Stats}`)} >
                             <ListItemText primary="View Stats" />
                         </ListItemButton>
                     </List>
