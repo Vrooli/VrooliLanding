@@ -3,7 +3,7 @@ services:
     ui:
         build:
             context: .
-            dockerfile: ./packages/ui/Dockerfile
+            dockerfile: ./Dockerfile
             args:
                 PROJECT_DIR: "${PROJECT_DIR}"
         container_name: ui
@@ -11,7 +11,6 @@ services:
             NODE_ENV: "${NODE_ENV}"
             PROJECT_DIR: "${PROJECT_DIR}"
             VIRTUAL_HOST: "${VIRTUAL_HOST}"
-            VIRTUAL_PATH: "/"
             VIRTUAL_PORT: "${UI_PORT}"
             LETSENCRYPT_HOST: "${VIRTUAL_HOST}"
             LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
@@ -19,12 +18,13 @@ services:
             - "${UI_PORT}:${UI_PORT}"
         networks:
             - proxy
+            - app
         volumes:
-            - ./packages/ui:${PROJECT_DIR}/packages/ui:z
-            - ./packages/shared:${PROJECT_DIR}/packages/shared:z
-        command: /bin/sh -c "chmod +x ./scripts/* && ./scripts/ui.sh"
+            - .:${PROJECT_DIR}:z
+        command: /bin/sh -c "chmod +x ./start.sh && ./start.sh"
 
 networks:
   proxy:
     external:
       name: nginx-proxy
+  app:
