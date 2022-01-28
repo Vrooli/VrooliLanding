@@ -1,8 +1,73 @@
 {
-    "private": true,
-    "workspaces": [
-        "packages/*"
-    ],
+    "name": "ui",
     "author": "Vrooli",
-    "license": "GPL-3.0"
+    "license": "GPL-3.0",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "type": "module",
+    "private": true,
+    "dependencies": {
+        "@emotion/react": "^11.0.0-next.10",
+        "@emotion/styled": "^11.0.0-next.19",
+        "@mui/icons-material": "^5.3.1",
+        "@mui/material": "^5.3.1",
+        "@mui/styles": "^5.3.0",
+        "hotkeys-js": "^3.8.7",
+        "lodash": "^4.17.21",
+        "pubsub-js": "^1.9.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-lazily": "^0.9.0",
+        "react-markdown": "^7.0.1",
+        "react-scripts": "^4.0.1",
+        "react-starfield-animation": "^1.0.1",
+        "react-tsparticles": "^1.39.1",
+        "remove": "^0.1.5",
+        "typescript": "^4.4.4",
+        "web-vitals": "^2.1.0",
+        "workbox-background-sync": "^6.3.0",
+        "workbox-broadcast-update": "^6.3.0",
+        "workbox-cacheable-response": "^6.3.0",
+        "workbox-core": "^6.3.0",
+        "workbox-expiration": "^6.3.0",
+        "workbox-google-analytics": "^6.3.0",
+        "workbox-navigation-preload": "^6.3.0",
+        "workbox-precaching": "^6.3.0",
+        "workbox-range-requests": "^6.3.0",
+        "workbox-routing": "^6.3.0",
+        "workbox-strategies": "^6.3.0",
+        "workbox-streams": "^6.3.0",
+        "wouter": "^2.8.0-alpha.2"
+    },
+    "scripts": {
+        "build": "react-scripts build",
+        "start-development": "react-scripts --max_old_space_size=8128 start",
+        "start-production": "serve -s build -l 3000",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "analyze": "source-map-explorer build/static/js/*"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/jest": "^27.0.2",
+        "@types/node": "^16.10.4",
+        "@types/pubsub-js": "^1.8.3",
+        "@types/react": "^17.0.29",
+        "@types/react-dom": "^17.0.9",
+        "chai": "^4.3.4",
+        "eslint-plugin-react": "^7.24.0",
+        "mocha": "^9.1.1",
+        "source-map-explorer": "^2.5.2"
+    }
 }
