@@ -42,7 +42,7 @@
     "scripts": {
         "build": "react-scripts build",
         "start-development": "react-scripts --max_old_space_size=8128 start",
-        "start-production": "serve -s build -l 4000",
+        "start-production": "serve -s build -l 3000",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "analyze": "source-map-explorer build/static/js/*"
