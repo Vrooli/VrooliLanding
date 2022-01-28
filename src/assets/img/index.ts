@@ -1,3 +1,3 @@
-export * from './NoImageIcon';
-export * from './NoImageWithTextIcon';
-export * from './NoteIcon';
+export * from './DiscordIcon';
+export * from './GitHubIcon';
+export * from './TwitterIcon';

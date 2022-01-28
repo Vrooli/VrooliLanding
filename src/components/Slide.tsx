@@ -1,14 +1,16 @@
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 export interface SlideProps {
     id: string;
     children: JSX.Element | JSX.Element[];
+    isFirst?: boolean;
     sx?: object;
 }
 
 export const Slide = ({
     id,
     children,
+    isFirst = false,
     sx,
 }: SlideProps) => {
     return (
@@ -16,17 +18,27 @@ export const Slide = ({
             id={id}
             key={id}
             sx={{
+                position: 'relative',
                 display: 'flex',
-                overflowX: 'hidden',
+                overflow: 'hidden',
                 justifyContent: 'center',
                 alignItems: 'center',
-                minHeight: '100vh',
+                minHeight: { xs: 'calc(100vh - 56px)', md: '100vh' },
                 ...sx
             }}
         >
-            <Box sx={{ padding: 4, zIndex: 1 }}>
+            <Stack
+                direction="column"
+                spacing={2}
+                p={4}
+                textAlign="center"
+                zIndex={1}
+                sx={{
+                    maxWidth: { xs: '100vw', sm: '90vw', md: 'min(80vw, 1000px)' },
+                }}
+            >
                 {children}
-            </Box>
+            </Stack>
         </Box>
     );
 }

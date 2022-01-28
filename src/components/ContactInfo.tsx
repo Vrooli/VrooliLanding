@@ -1,4 +1,4 @@
-import { EMAIL, SOCIALS } from 'utils/consts';
+import { BusinessFields } from 'utils/consts';
 import {  
     BottomNavigation, 
     BottomNavigationAction, 
@@ -6,11 +6,7 @@ import {
     Theme, 
     Tooltip 
 } from '@mui/material';
-import { 
-    Email as EmailIcon,
-    GitHub as GitHubIcon,
-    Twitter as TwitterIcon,
-} from "@mui/icons-material";
+import { DiscordIcon, GitHubIcon, TwitterIcon } from 'assets/img';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -55,19 +51,19 @@ export const ContactInfo = ({
     }
 
     const contactInfo = [
-        ['Find us on Twitter', 'Twitter', SOCIALS.Twitter, TwitterIcon],
-        ['Email Us', 'Email', EMAIL.Link, EmailIcon],
-        ['Source code', 'Code', SOCIALS.GitHub, GitHubIcon],
+        ['Find us on Twitter', 'Twitter', BusinessFields.SOCIALS.Twitter, TwitterIcon],
+        ['Join our Discord', 'Discord', BusinessFields.SOCIALS.Discord, DiscordIcon],
+        ['Source code', 'Code', BusinessFields.SOCIALS.GitHub, GitHubIcon],
     ]
 
     return (
         <div style={{ minWidth: 'fit-content', height: 'fit-content'}} {...props}>
             <BottomNavigation className={classes.nav} showLabels>
-                {contactInfo.map(([tooltip, label, link, Icon]) => (
-                    <Tooltip title={tooltip} placement="top">
+                {contactInfo.map(([tooltip, label, link, Icon], index: number) => (
+                    <Tooltip key={`contact-info-button-${index}`} title={tooltip} placement="top">
                         <BottomNavigationAction className={classes.navAction} label={label} onClick={(e) => openLink(e, link)} icon={
-                            <IconButton className={classes.iconButton}>
-                                <Icon />
+                            <IconButton sx={{background: (t) => t.palette.secondary.main}}>
+                                <Icon fill="#1e581f"/>
                             </IconButton>
                         } />
                     </Tooltip>

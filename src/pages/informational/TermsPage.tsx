@@ -3,28 +3,37 @@ import ReactMarkdown from 'react-markdown';
 import { PolicyBreadcrumbs } from 'components';
 import { convertToDot, valueFromDot } from "utils";
 import { Box, useTheme } from '@mui/material';
-import * as businessFields from "utils/consts";
+import { BusinessFields } from "utils/consts";
+import termsMarkdown from '../../assets/policy/privacy.md';
 
 export const TermsPage = () => {
     const theme = useTheme();
-    const termsData = require('../../assets/policy/terms.md');
-    const [terms, setTerms] = useState<string | null>(null);
+    // Parse terms markdown from .md file
+    const [terms, setTerms] = useState<string>('');
+    useEffect(() => {
+        fetch(termsMarkdown)
+            .then((response) => response.text())
+            .then((text) => {
+                setTerms(text);
+            });
+    }, []);
 
     useEffect(() => {
-        if (termsData === undefined) return;
-        let data = termsData;
-        const business_fields = Object.keys(convertToDot(businessFields));
-        business_fields.forEach(f => data = data?.replaceAll(`<${f}>`, valueFromDot(businessFields, f) || '') ?? '');
+        if (terms === undefined) return;
+        let data = terms;
+        const business_fields = Object.keys(convertToDot(BusinessFields));
+        business_fields.forEach(f => data = data?.replaceAll(`<${f}>`, valueFromDot(BusinessFields, f) || '') ?? '');
         setTerms(data);
-    }, [termsData])
+    }, [terms])
 
     return (
-        <Box id="page" sx={{
+        <Box id="page" p={4} sx={{
+            background: "#cad0e7",
             '& a': {
-                color: theme.palette.secondary.light,
+                color: theme.palette.secondary.dark,
             }
         }}>
-            <PolicyBreadcrumbs textColor={theme.palette.secondary.dark} />
+            <PolicyBreadcrumbs />
             <ReactMarkdown>{ terms || '' }</ReactMarkdown>
         </Box>
     );

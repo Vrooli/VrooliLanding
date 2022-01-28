@@ -3,28 +3,37 @@ import ReactMarkdown from 'react-markdown';
 import { PolicyBreadcrumbs } from 'components';
 import { convertToDot, valueFromDot } from "utils";
 import { Box, useTheme } from '@mui/material';
-import * as businessFields from "utils/consts";
+import { BusinessFields } from "utils/consts";
+import privacyMarkdown from '../../assets/policy/privacy.md';
 
 export const PrivacyPolicyPage = () => {
     const theme = useTheme();
-    const privacyData = require('../../assets/policy/privacy.md');
-    const [privacy, setPrivacy] = useState<string | null>(null);
+    // Parse privacy markdown from .md file
+    const [privacy, setPrivacy] = useState<string>('');
+    useEffect(() => {
+        fetch(privacyMarkdown)
+            .then((response) => response.text())
+            .then((text) => {
+                setPrivacy(text);
+            });
+    }, []);
 
     useEffect(() => {
-        if (!privacyData) return;
-        let data = privacyData;
-        const business_fields = Object.keys(convertToDot(businessFields));
-        business_fields.forEach(f => data = data?.replaceAll(`<${f}>`, valueFromDot(businessFields, f) || '') ?? '');
+        if (!privacy) return;
+        let data = privacy;
+        const business_fields = Object.keys(convertToDot(BusinessFields));
+        business_fields.forEach(f => data = data?.replaceAll(`<${f}>`, valueFromDot(BusinessFields, f) || '') ?? '');
         setPrivacy(data);
-    }, [privacyData])
+    }, [privacy])
 
     return (
-        <Box id="page" sx={{
+        <Box id="page" p={4} sx={{
+            background: "#cad0e7",
             '& a': {
                 color: theme.palette.secondary.dark,
             },
         }}>
-            <PolicyBreadcrumbs textColor={theme.palette.secondary.dark} />
+            <PolicyBreadcrumbs />
             <ReactMarkdown>{ privacy || '' }</ReactMarkdown>
         </Box>
     );

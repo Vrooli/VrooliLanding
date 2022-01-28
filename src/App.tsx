@@ -14,16 +14,15 @@ import hotkeys from 'hotkeys-js';
 
 const useStyles = makeStyles(() => ({
     "@global": {
-        html: {
-            overflowX: 'hidden',
-        },
         body: {
             backgroundColor: 'black',
+            overflowX: 'hidden',
+            overflowY: 'auto',
         },
         '#page': {
             minWidth: '100%',
             minHeight: '100%',
-            marginTop: '10vh'
+            marginTop: '10vh',
         },
         '@font-face': {
             fontFamily: 'Lato',
@@ -37,38 +36,23 @@ const useStyles = makeStyles(() => ({
                 textAlign: 'left',
             }
         },
+        '.roadmapList': {
+            '& li': {
+                listStyleType: 'circle',
+                fontSize: 'large',
+                textAlign: 'left',
+            }
+        },
+        '.tsparticles-canvas': {
+            position: 'absolute',
+            overflow: 'hidden',
+        }
     },
 }));
 
 export function App() {
     const classes = useStyles();
     const [theme, setTheme] = useState(themes.light);
-
-    // If anchor tag in url, scroll to element
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        return;
-        // if not a hash link, scroll to top
-        if (window.location.hash === '') {
-            console.log('scroll to top', window.location);
-            window.scrollTo(0, 0);
-        }
-        // else scroll to id
-        else {
-            console.log('scrollling to hash', window.location);
-            setTimeout(() => {
-                console.log('in set timeout')
-                const id = window.location.hash.replace('#', '');
-                console.log('id', id);
-                const element = document.getElementById(id);
-                console.log('element', element);
-                if (element) {
-                    console.log('scrolling to element');
-                    element.scrollIntoView();
-                }
-            }, 0);
-        }
-    }, []); // do this on route change
 
     useEffect(() => {
 

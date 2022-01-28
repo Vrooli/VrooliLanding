@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 export type ValueOf<T> = T[keyof T];
 
+// Set to true when product launches
+export const Launched = false;
+
 export const PUBS = {
     Loading: "loading",
     AlertDialog: "alertDialog",
@@ -10,21 +13,24 @@ export const PUBS = {
 }
 export type PUBS = ValueOf<typeof PUBS>;
 
-export const BUSINESS_NAME = 'Vrooli';
-export const EMAIL = {
-    Label: 'info@vrooli.com',
-    Link: 'mailto:info@vrooli.com'
+export const BusinessFields = {
+    BUSINESS_NAME: 'Vrooli',
+    EMAIL: {
+        Label: 'info@vrooli.com',
+        Link: 'mailto:info@vrooli.com'
+    },
+    SUPPORT_EMAIL: {
+        Label: 'support@vrooli.com',
+        Link: 'mailto:support@vrooli.com'
+    },
+    SOCIALS: {
+        Discord: 'https://discord.gg/kgxfyxVY',
+        GitHub: 'https://github.com/MattHalloran/Vrooli',
+        Twitter: 'https://twitter.com/VrooliOfficial'
+    },
+    LANDING_URL: 'https://vrooli.com',
+    APP_URL: 'https://app.vrooli.com',
 }
-export const SUPPORT_EMAIL = {
-    Label: 'support@vrooli.com',
-    Link: 'mailto:support@info.vrooli.com'
-}
-export const SOCIALS = {
-    GitHub: 'https://github.com/MattHalloran/Vrooli',
-    Twitter: 'https://twitter.com/VrooliOfficial'
-}
-export const LANDING_URL = 'https://vrooli.com';
-export const APP_URL = 'https://app.vrooli.com';
 
 export const APP_LINKS = {
     Develop: '/develop', // Develop dashboard

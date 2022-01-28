@@ -2,8 +2,8 @@ import { Box } from '@mui/material';
 
 interface Props {
     embedId: string;
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
 }
 
 export const YoutubeEmbed = ({
@@ -13,19 +13,9 @@ export const YoutubeEmbed = ({
 }: Props) => {
     return (
         <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            paddingBottom: '56.25%',
-            position: 'relative',
-            height: 0,
-            '& iframe': {
-                left: 0,
-                top: 0,
-                height: '100%',
-                width: '100%',
-                position: 'absolute',
-            }
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
         }}>
             <iframe
                 width={width}

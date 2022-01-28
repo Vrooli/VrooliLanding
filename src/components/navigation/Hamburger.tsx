@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         borderRadius: 0,
         borderBottom: `1px solid ${theme.palette.primary.dark}`,
         justifyContent: 'end',
-        direction: 'rtl',
+        flexDirection: 'row-reverse',
     },
     menuIcon: {
         color: theme.palette.primary.contrastText,
@@ -86,10 +86,11 @@ export const Hamburger = () => {
                 <CopyrightBreadcrumbs
                     sx={{
                         color: (t) => t.palette.primary.contrastText,
-                        padding: 5,
+                        padding: 3,
                         display: 'block',
                         marginLeft: 'auto',
                         marginRight: 'auto',
+                        marginTop: 'auto',
                     }}
                 />
             </SwipeableDrawer>

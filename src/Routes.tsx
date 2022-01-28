@@ -2,7 +2,8 @@ import { Suspense, useCallback } from 'react';
 import { lazily } from 'react-lazily';
 import { Route, Switch } from 'wouter';
 import { LANDING_LINKS as LINKS } from 'utils/consts';
-import { BUSINESS_NAME } from 'utils/consts';
+import { BusinessFields } from 'utils/consts';
+import { ScrollToTop } from 'components';
 
 // Lazy loading in the Routes component is a recommended way to improve performance. See https://reactjs.org/docs/code-splitting.html#route-based-code-splitting
 const {
@@ -17,10 +18,11 @@ const {
 
 const Routes = () => {
 
-    const title = useCallback((page: string) => `${page} | ${BUSINESS_NAME}`, []);
+    const title = useCallback((page: string) => `${page} | ${BusinessFields.BUSINESS_NAME}`, []);
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
+            <ScrollToTop />
             <Switch>
                 {/* ========= START INFORMATIONAL ROUTES ========= */}
                 {/* Informational pages to describe Vrooli to potential customers */}

@@ -1,16 +1,9 @@
-import { APP_LINKS, APP_URL, LANDING_LINKS } from 'utils/consts';
+import { APP_LINKS, BusinessFields, LANDING_LINKS } from 'utils/consts';
 import { makeStyles } from '@mui/styles';
-import { SvgIconTypeMap } from '@mui/material';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Tooltip, Theme } from '@mui/material';
-import {
-    Email as EmailIcon,
-    GitHub as GitHubIcon,
-    Twitter as TwitterIcon,
-} from '@mui/icons-material';
+import { DiscordIcon, GitHubIcon, TwitterIcon } from 'assets/img';
 import { CopyrightBreadcrumbs } from 'components';
 import { useLocation } from 'wouter';
-import { EMAIL, SOCIALS } from 'utils/consts';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { openLink } from 'utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,10 +38,10 @@ export const Footer = () => {
     const classes = useStyles();
     const [, setLocation] = useLocation();
 
-    const contactLinks: Array<[string, string, string, string, OverridableComponent<SvgIconTypeMap<{}, "svg">>]> = [
-        ['contact-twitter', 'Find us on Twitter', SOCIALS.Twitter, 'Twitter', TwitterIcon],
-        ['contact-email', 'Have a question or feedback? Email us!', EMAIL.Link, 'Email Us', EmailIcon],
-        ['contact-github', 'Check out the source code, or contribute :)', SOCIALS.GitHub, 'Source Code', GitHubIcon],
+    const contactLinks: Array<[string, string, string, string, any]> = [
+        ['contact-twitter', 'Find us on Twitter', BusinessFields.SOCIALS.Twitter, 'Twitter', TwitterIcon],
+        ['contact-email', 'Have a question or feedback? Post it to our Discord!', BusinessFields.SOCIALS.Discord, 'Join our Discord', DiscordIcon],
+        ['contact-github', 'Check out the source code, or contribute :)', BusinessFields.SOCIALS.GitHub, 'Source Code', GitHubIcon],
     ]
 
     return (
@@ -62,7 +55,7 @@ export const Footer = () => {
                         <ListItemButton component="a" onClick={() => openLink(setLocation, LANDING_LINKS.About)} >
                             <ListItemText primary="About Us" />
                         </ListItemButton>
-                        <ListItemButton component="a" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Stats}`)} >
+                        <ListItemButton component="a" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Stats}`)} >
                             <ListItemText primary="View Stats" />
                         </ListItemButton>
                     </List>
@@ -76,7 +69,7 @@ export const Footer = () => {
                             <Tooltip key={key} title={tooltip} placement="left">
                                 <ListItemButton aria-label={label} onClick={() => window.open(src, '_blank', 'noopener,noreferrer')}>
                                     <ListItemIcon>
-                                        <Icon className={classes.icon} ></Icon>
+                                        <Icon fill="white" />
                                     </ListItemIcon>
                                     <ListItemText primary={text} />
                                 </ListItemButton>

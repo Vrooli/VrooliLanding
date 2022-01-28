@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Hamburger } from './Hamburger';
 import { NavList } from './NavList';
 import { useLocation } from 'wouter';
-import { BUSINESS_NAME, LANDING_LINKS } from 'utils/consts';
+import { BusinessFields, LANDING_LINKS } from 'utils/consts';
 
 const SHOW_HAMBURGER_AT = 1000;
 
@@ -89,9 +89,9 @@ export const Navbar = () => {
                 <Toolbar>
                     <div className={classes.navLogoContainer} onClick={toHome}>
                         <div className={classes.navLogoDiv}>
-                            <img src={Logo} alt={`${BUSINESS_NAME} Logo`} className={classes.navLogo} />
+                            <img src={Logo} alt={`${BusinessFields.BUSINESS_NAME} Logo`} className={classes.navLogo} />
                         </div>
-                        <Typography className={classes.navName} variant="h6" noWrap>{BUSINESS_NAME}</Typography>
+                        <Typography className={classes.navName} variant="h6" noWrap>{BusinessFields.BUSINESS_NAME}</Typography>
                     </div>
                     <div className={classes.toRight}>
                         {show_hamburger ? <Hamburger /> : <NavList />}

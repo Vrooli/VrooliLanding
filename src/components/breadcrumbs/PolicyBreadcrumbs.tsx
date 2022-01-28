@@ -10,5 +10,11 @@ const paths = [
 export const PolicyBreadcrumbs = ({...props}: PolicyBreadcrumbsProps) => BreadcrumbsBase({
     paths: paths,
     ariaLabel: 'Policies breadcrumb',
+    sx: {
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: 'larger',
+        color: (t) => t.palette.secondary.dark,
+    },
     ...props
 })

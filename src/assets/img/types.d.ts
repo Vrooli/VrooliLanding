@@ -4,4 +4,5 @@ export interface SvgProps extends React.SVGProps<SVGSVGElement> {
     onClick?: () => any;
     width?: number | string;
     height?: number | string;
+    fill?: string;
 }
