@@ -1,5 +1,5 @@
 FROM node:14.17-alpine
-EXPOSE 3000
+EXPOSE 3069
 
 # Set variables
 ARG PROJECT_DIR

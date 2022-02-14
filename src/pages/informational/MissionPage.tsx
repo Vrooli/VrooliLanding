@@ -1,7 +1,7 @@
 import { APP_LINKS, BusinessFields, LANDING_LINKS, openLink } from 'utils';
 import Thinking from 'assets/img/thinking.png';
-import Target from 'assets/img/target.png';
-import Mission from 'assets/img/rocket.png';
+import Target from 'assets/img/target.webp';
+import Mission from 'assets/img/rocket.webp';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { slideImageContainer, slideText, slideTitle, translucentContainer, textPop } from 'styles';
 import { useLocation } from 'wouter';

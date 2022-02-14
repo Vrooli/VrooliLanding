@@ -1,20 +1,23 @@
-import { Slide, YoutubeEmbed } from 'components';
-import { APP_LINKS, BusinessFields, LANDING_LINKS, Launched } from 'utils/consts';
+import { Slide } from 'components/Slide';
+import { APP_LINKS, BusinessFields, LANDING_LINKS } from 'utils/consts';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
-import Relax from 'assets/img/relax.png';
+import Relax from 'assets/img/relax.webp';
 import BlankRoutine from 'assets/img/blank-routine-1.png';
 import MonkeyCoin from 'assets/img/monkey-coin-page.png';
 import Community from 'assets/img/community.svg';
-import Blockchain from 'assets/img/blockchain.png';
+import Blockchain from 'assets/img/blockchain.webp';
 import World from 'assets/img/world.png';
 import { openLink } from 'utils';
 import { useLocation } from 'wouter';
 import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import StarfieldAnimation from 'react-starfield-animation';
 import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
+import { lazily } from 'react-lazily';
+
+const { YoutubeEmbed } = lazily(() => import('../../components/YoutubeEmbed'));
 
 // Hand wave animation
 const wave = keyframes`
@@ -100,11 +103,11 @@ export const HomePage = () => {
                 </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} margin="auto">
-                        <Typography variant="h5" sx={{ ...slideText }}>
+                        <Typography component="h2" variant="h5" sx={{ ...slideText }}>
                             Accomplish your goals in a few clicks, through the power of visual work routines
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Man relaxing at beach - by Vecteezy" src={Relax} />
                         </Box>
@@ -135,7 +138,7 @@ export const HomePage = () => {
                             </ul>
                         </Stack>
                     </Grid>
-                    <Grid item xs={12} sm={6} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Non-descriptive visual work routine" src={BlankRoutine} />
                         </Box>
@@ -195,7 +198,7 @@ export const HomePage = () => {
                     Auto-generated interfaces unlock the possibility of performing entire routines without leaving Vrooli
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Routine runner interface example - Minting tokens" src={MonkeyCoin} />
                         </Box>
@@ -226,7 +229,7 @@ export const HomePage = () => {
                             <li>Discover projects and organizations that need your help</li>
                         </ul>
                     </Grid>
-                    <Grid item xs={12} sm={6} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Community illustration - by Vecteezy" src={Community} />
                         </Box>
@@ -242,7 +245,7 @@ export const HomePage = () => {
                     Not Just for Prototypes...
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={5} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={5} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Blockchain illustration - by Vecteezy" src={Blockchain} />
                         </Box>
@@ -265,7 +268,9 @@ export const HomePage = () => {
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Vrooli is live! Let's change the world together!💙
                 </Typography>
-                <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
+                </Suspense>
                 <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
