@@ -261,7 +261,11 @@ export const HomePage = () => {
                 </Grid>
             </Slide>
 
-            <Slide id="join-the-movement" sx={{ color: 'white', background: `url(${World}) center center / cover no-repeat fixed` }}>
+            <Slide id="join-the-movement" sx={{ 
+                color: 'white', 
+                background: `url(${World}) no-repeat center center`,
+                backgroundSize: 'cover',
+            }}>
                 <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
                     Join the Movement
                 </Typography>
