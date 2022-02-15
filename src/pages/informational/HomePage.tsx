@@ -158,7 +158,7 @@ export const HomePage = () => {
                     overflowX: 'hidden',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    minHeight: { xs: 'calc(100vh - 56px)', md: '100vh' },
+                    minHeight: { xs: 'calc(102vh - 56px)', md: '102vh' },
                     color: 'white',
                     background: 'radial-gradient(circle, rgb(13 13 79) 12%, rgb(13 13 69) 52%, rgb(11 11 57) 80%)'
                 }}

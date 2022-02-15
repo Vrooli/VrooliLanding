@@ -70,7 +70,7 @@ export const MissionPage = () => {
                     overflowX: 'hidden',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    minHeight: { xs: 'calc(100vh - 56px)', md: '100vh' },
+                    minHeight: { xs: 'calc(102vh - 56px)', md: '102vh' },
                     color: 'white',
                     background: 'linear-gradient(-46deg,#713a63,#601f6f,#023d87,#69d7d2) 50%/cover no-repeat fixed;',
                     backgroundSize: '400% 400%',
