@@ -23,7 +23,7 @@ export const Slide = ({
                 overflow: 'hidden',
                 justifyContent: 'center',
                 alignItems: 'center',
-                minHeight: { xs: 'calc(100vh - 56px)', md: '100vh' },
+                minHeight: { xs: 'calc(102vh - 56px)', md: '102vh' },
                 ...sx
             }}
         >

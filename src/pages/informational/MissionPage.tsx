@@ -15,7 +15,7 @@ export const MissionPage = () => {
     return (
         <Box id="page">
             <Slide id="the-problem" isFirst={true} sx={{ color: 'white', background: 'radial-gradient(circle, rgb(29 29 113) 12%, rgb(25 25 83) 52%, rgb(17 17 66) 80%)' }}>
-                <Typography variant='h2' component="h1" pb={4} sx={{ ...slideTitle, paddingTop: { xs: 16, sm: 0} }}>The Problem</Typography>
+                <Typography variant='h2' component="h1" pb={4} sx={{ ...slideTitle, paddingTop: { xs: 16, sm: 0 } }}>The Problem</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Project Catalyst will empower the masses with governance, but this system is not perfect...
                 </Typography>
@@ -29,7 +29,7 @@ export const MissionPage = () => {
                             </ul>
                         </Stack>
                     </Grid>
-                    <Grid item xs={12} sm={5} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={5} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Person thinking - By Vecteezy" src={Thinking} />
                         </Box>
@@ -43,7 +43,7 @@ export const MissionPage = () => {
             <Slide id='our-mission' sx={{ background: 'radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)' }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>Our Mission</Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} sx={{paddingLeft: '0 !important'}}>
+                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
                         <Box sx={{ ...slideImageContainer }}>
                             <img alt="Large target - By Vecteezy" src={Target} />
                         </Box>
@@ -70,7 +70,7 @@ export const MissionPage = () => {
                     overflowX: 'hidden',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    minHeight: { xs: 'calc(100vh - 56px)', md: '100vh' },
+                    minHeight: { xs: 'calc(102vh - 56px)', md: '102vh' },
                     color: 'white',
                     background: 'linear-gradient(-46deg,#713a63,#601f6f,#023d87,#69d7d2) 50%/cover no-repeat fixed;',
                     backgroundSize: '400% 400%',
@@ -170,7 +170,7 @@ export const MissionPage = () => {
                         We're building a future-friendly, open-source platform for automating entrepreneurship
                     </Typography>
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `https://vrooli.com/#understand-your-workflow`)}>The Benefits</Button>
+                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Benefits)}>The Benefits</Button>
                         <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                     </Stack>
                 </Stack>
@@ -192,7 +192,11 @@ export const MissionPage = () => {
                 </Typography>
             </Slide>
 
-            <Slide id='roadmap' sx={{ color: 'white', background: `url(${Mission}) center center / cover no-repeat fixed` }}>
+            <Slide id='roadmap' sx={{
+                color: 'white',
+                background: `url(${Mission}) no-repeat center center`,
+                backgroundSize: 'cover',
+            }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>Roadmap</Typography>
                 <Stack direction="column" spacing={10}>
                     <Box sx={{ ...translucentContainer }}>
