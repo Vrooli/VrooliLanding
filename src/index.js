@@ -1,10 +1,21 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { App } from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+    <App />
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.register({
+    onUpdate: registration => {
+        alert('New version available!  Ready to update?');
+        if (registration && registration.waiting) {
+            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+        window.location.reload();
+    }
+});
