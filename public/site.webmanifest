@@ -1,7 +1,7 @@
 {
-    "name": "Vrooli - Visual Work Routines",
+    "name": "Vrooli - Productivity, Decentralized",
     "short_name": "Vrooli",
-    "categories": ["education", "personalization", "productivity"],
+    "categories": ["automation", "productivity"],
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -22,7 +22,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "display": "standalone",
     "orientation": "any",
     "scope": "/",
     "start_url": "/",
