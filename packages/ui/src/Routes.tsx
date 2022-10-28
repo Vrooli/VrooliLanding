@@ -1,6 +1,6 @@
 import { Suspense, useCallback } from 'react';
 import { lazily } from 'react-lazily';
-import { Route, Switch } from 'wouter';
+import { Route, Switch } from '@shared/route';
 import { LANDING_LINKS as LINKS } from 'utils/consts';
 import { BusinessFields } from 'utils/consts';
 import { ScrollToTop } from 'components';
@@ -35,35 +35,60 @@ const Routes = () => {
             <Switch>
                 {/* ========= START INFORMATIONAL ROUTES ========= */}
                 {/* Informational pages to describe Vrooli to potential customers */}
-                <Route path={LINKS.Home}>
+                <Route
+                    path={LINKS.Home}
+                    sitemapIndex
+                    priority={1.0}
+                    changeFreq="weekly"
+                >
                     <Suspense fallback={Fallback}>
                         <Page title={title('Home')}>
                             <HomePage />
                         </Page>
                     </Suspense>
                 </Route>
-                <Route path={LINKS.Mission}>
+                <Route
+                    path={LINKS.Mission}
+                    sitemapIndex
+                    priority={0.7}
+                    changeFreq="monthly"
+                >
                     <Suspense fallback={Fallback}>
                         <Page title={title('Mission')}>
                             <MissionPage />
                         </Page>
                     </Suspense>
                 </Route>
-                <Route path={LINKS.About}>
+                <Route
+                    path={LINKS.About}
+                    sitemapIndex
+                    priority={0.7}
+                    changeFreq="monthly"
+                >
                     <Suspense fallback={Fallback}>
                         <Page title={title('About')}>
                             <AboutPage />
                         </Page>
                     </Suspense>
                 </Route>
-                <Route path={LINKS.PrivacyPolicy}>
+                <Route
+                    path={LINKS.PrivacyPolicy}
+                    sitemapIndex
+                    priority={0.3}
+                    changeFreq="monthly"
+                >
                     <Suspense fallback={Fallback}>
                         <Page title={title('Privacy Policy')}>
                             <PrivacyPolicyPage />
                         </Page>
                     </Suspense>
                 </Route>
-                <Route path={LINKS.Terms}>
+                <Route
+                    path={LINKS.Terms}
+                    sitemapIndex
+                    priority={0.3}
+                    changeFreq="monthly"
+                >
                     <Suspense fallback={Fallback}>
                         <Page title={title('Terms & Conditions')}>
                             <TermsPage />

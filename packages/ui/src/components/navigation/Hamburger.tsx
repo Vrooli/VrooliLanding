@@ -12,7 +12,7 @@ import {
 import { IconButton, SwipeableDrawer, List, ListItem, ListItemIcon, Collapse, ListItemText, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { CopyrightBreadcrumbs } from 'components';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 
 const useStyles = makeStyles((theme: Theme) => ({
     drawerPaper: {

@@ -8,7 +8,7 @@ import Community from 'assets/img/community.svg';
 import Blockchain from 'assets/img/blockchain.webp';
 import World from 'assets/img/world.png';
 import { openLink } from 'utils';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { Suspense, useEffect, useState } from 'react';

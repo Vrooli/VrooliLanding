@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { Link } from '@shared/route';
 import { Box, Button } from '@mui/material';
 import { APP_LINKS } from 'utils/consts';
 

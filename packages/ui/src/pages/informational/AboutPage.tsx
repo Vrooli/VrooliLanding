@@ -2,7 +2,7 @@ import MattSketch from 'assets/img/thought-sketch-edited-3.png';
 import { Slide } from 'components';
 import { Box, Button, Grid, Stack, Tooltip, Typography } from '@mui/material';
 import { BusinessFields, openLink } from 'utils';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 import { slideImageContainer, slideText, slideTitle } from 'styles';
 
 export const AboutPage = () => {

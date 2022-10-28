@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Tooltip, Theme } from '@mui/material';
 import { DiscordIcon, GitHubIcon, TwitterIcon } from 'assets/img';
 import { CopyrightBreadcrumbs } from 'components';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 import { openLink } from 'utils';
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, Slide, useScrollTrigger, Theme } from '@mu
 import { makeStyles } from '@mui/styles';
 import { Hamburger } from './Hamburger';
 import { NavList } from './NavList';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 import { BusinessFields, LANDING_LINKS } from 'utils/consts';
 
 const SHOW_HAMBURGER_AT = 1000;

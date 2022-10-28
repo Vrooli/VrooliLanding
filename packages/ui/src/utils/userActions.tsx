@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { ValueOf } from 'utils/consts';
 import { openLink } from 'utils';
-import { Path } from 'wouter';
+import { Path } from '@shared/route';
 
 export const ACTION_TAGS = {
     Home: 'home',

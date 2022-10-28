@@ -4,7 +4,7 @@ import Target from 'assets/img/target.webp';
 import Mission from 'assets/img/rocket.webp';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { slideImageContainer, slideText, slideTitle, translucentContainer, textPop } from 'styles';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 import { Slide } from 'components';
 import Particles from "react-tsparticles";
 import { CSSProperties } from 'react';

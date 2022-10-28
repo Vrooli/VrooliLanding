@@ -5,7 +5,7 @@ import {
 import { Action, actionsToMenu, ACTION_TAGS, getUserActions, openLink } from 'utils';
 import { Button, Container, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useLocation } from 'wouter';
+import { useLocation } from '@shared/route';
 import { useMemo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
