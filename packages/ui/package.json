@@ -40,8 +40,8 @@
     },
     "scripts": {
         "build": "react-scripts build",
-        "start-development": "react-scripts --max_old_space_size=8128 start",
-        "start-production": "serve -s build -l 3069",
+        "start-development": "PORT=3069 react-scripts --max_old_space_size=8128 start",
+        "start-production": "PORT=3069 serve -s build -l 3069",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "analyze": "source-map-explorer build/static/js/*"
