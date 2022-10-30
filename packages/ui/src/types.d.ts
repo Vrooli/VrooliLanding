@@ -1,4 +1,1 @@
-// Enable Nami integration
-declare global {
-    interface Window { cardano: any; }
-}
+export type SetLocation = (to: Path, options?: { replace?: boolean }) => void;

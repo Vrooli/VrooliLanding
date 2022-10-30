@@ -4,13 +4,11 @@ import {
     Footer,
     Navbar,
 } from 'components';
-import PubSub from 'pubsub-js';
-import { PUBS, themes } from 'utils';
+import { themes } from 'utils';
 import { Routes } from 'Routes';
 import { Box, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import SakBunderan from './assets/font/SakBunderan.woff';
-import hotkeys from 'hotkeys-js';
 
 const useStyles = makeStyles(() => ({
     "@global": {
@@ -51,24 +49,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 export function App() {
-    const classes = useStyles();
+    useStyles();
     const [theme, setTheme] = useState(themes.light);
-
-    useEffect(() => {
-
-        const handlers = {
-            OPEN_MENU: () => PubSub.publish(PUBS.BurgerMenuOpen, true),
-            TOGGLE_MENU: () => PubSub.publish(PUBS.BurgerMenuOpen, 'toggle'),
-            CLOSE_MENU: () => PubSub.publish(PUBS.BurgerMenuOpen, false),
-            CLOSE_MENU_OR_POPUP: () => {
-                handlers.CLOSE_MENU();
-            }
-        }
-        hotkeys('left', handlers.OPEN_MENU);
-        hotkeys('right', handlers.CLOSE_MENU);
-        hotkeys('m', handlers.TOGGLE_MENU);
-        hotkeys('escape,backspace', handlers.CLOSE_MENU_OR_POPUP);
-    }, []);
 
     useEffect(() => {
         //if (session && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(themes.dark);

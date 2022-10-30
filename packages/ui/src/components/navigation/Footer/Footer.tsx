@@ -1,10 +1,10 @@
-import { APP_LINKS, BusinessFields, LANDING_LINKS } from 'utils/consts';
 import { makeStyles } from '@mui/styles';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Tooltip, Theme } from '@mui/material';
 import { DiscordIcon, GitHubIcon, TwitterIcon } from 'assets/img';
 import { CopyrightBreadcrumbs } from 'components';
 import { useLocation } from '@shared/route';
 import { openLink } from 'utils';
+import { APP_LINKS, APP_URL, LANDING_LINKS, SOCIALS } from '@shared/consts';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -39,9 +39,9 @@ export const Footer = () => {
     const [, setLocation] = useLocation();
 
     const contactLinks: Array<[string, string, string, string, any]> = [
-        ['contact-twitter', 'Find us on Twitter', BusinessFields.SOCIALS.Twitter, 'Twitter', TwitterIcon],
-        ['contact-email', 'Have a question or feedback? Post it to our Discord!', BusinessFields.SOCIALS.Discord, 'Join our Discord', DiscordIcon],
-        ['contact-github', 'Check out the source code, or contribute :)', BusinessFields.SOCIALS.GitHub, 'Source Code', GitHubIcon],
+        ['contact-twitter', 'Find us on Twitter', SOCIALS.Twitter, 'Twitter', TwitterIcon],
+        ['contact-email', 'Have a question or feedback? Post it to our Discord!', SOCIALS.Discord, 'Join our Discord', DiscordIcon],
+        ['contact-github', 'Check out the source code, or contribute :)', SOCIALS.GitHub, 'Source Code', GitHubIcon],
     ]
 
     return (
@@ -52,10 +52,10 @@ export const Footer = () => {
                         <ListItem component="h2" >
                             <ListItemText className={classes.upper} primary="Resources" />
                         </ListItem>
-                        <ListItemButton component="a" onClick={() => openLink(setLocation, LANDING_LINKS.About)} >
+                        <ListItemButton component="a" onClick={() => openLink(setLocation, LANDING_LINKS.AboutUs)} >
                             <ListItemText primary="About Us" />
                         </ListItemButton>
-                        <ListItemButton component="a" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Stats}`)} >
+                        <ListItemButton component="a" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Stats}`)} >
                             <ListItemText primary="View Stats" />
                         </ListItemButton>
                     </List>

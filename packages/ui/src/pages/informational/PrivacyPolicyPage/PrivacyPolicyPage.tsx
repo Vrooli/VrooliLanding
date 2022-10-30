@@ -3,8 +3,17 @@ import ReactMarkdown from 'react-markdown';
 import { PolicyBreadcrumbs } from 'components';
 import { convertToDot, valueFromDot } from "utils";
 import { Box, useTheme } from '@mui/material';
-import { BusinessFields } from "utils/consts";
-import privacyMarkdown from '../../assets/policy/privacy.md';
+import privacyMarkdown from '../../../assets/policy/privacy.md';
+import { APP_URL, BUSINESS_NAME, EMAIL, LANDING_URL, SOCIALS, SUPPORT_EMAIL } from "@shared/consts";
+
+const BUSINESS_DATA = {
+    BUSINESS_NAME,
+    EMAIL,
+    SUPPORT_EMAIL,
+    SOCIALS,
+    LANDING_URL,
+    APP_URL,
+}
 
 export const PrivacyPolicyPage = () => {
     const theme = useTheme();
@@ -21,8 +30,8 @@ export const PrivacyPolicyPage = () => {
     useEffect(() => {
         if (!privacy) return;
         let data = privacy;
-        const business_fields = Object.keys(convertToDot(BusinessFields));
-        business_fields.forEach(f => data = data?.replaceAll(`<${f}>`, valueFromDot(BusinessFields, f) || '') ?? '');
+        const business_fields = Object.keys(convertToDot(BUSINESS_DATA));
+        business_fields.forEach(f => data = data?.replaceAll(`<${f}>`, valueFromDot(BUSINESS_DATA, f) || '') ?? '');
         setPrivacy(data);
     }, [privacy])
 
@@ -34,7 +43,7 @@ export const PrivacyPolicyPage = () => {
             },
         }}>
             <PolicyBreadcrumbs />
-            <ReactMarkdown>{ privacy || '' }</ReactMarkdown>
+            <ReactMarkdown>{privacy || ''}</ReactMarkdown>
         </Box>
     );
 }

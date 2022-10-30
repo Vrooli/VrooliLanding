@@ -1,19 +1,19 @@
 import { Suspense, useCallback } from 'react';
 import { lazily } from 'react-lazily';
 import { Route, Switch } from '@shared/route';
-import { LANDING_LINKS as LINKS } from 'utils/consts';
-import { BusinessFields } from 'utils/consts';
 import { ScrollToTop } from 'components';
 import { Page } from 'pages/wrapper/Page';
 import { Box, CircularProgress } from '@mui/material';
+import { BUSINESS_NAME, LANDING_LINKS as LINKS } from '@shared/consts';
 
 // Lazy loading in the Routes component is a recommended way to improve performance. See https://reactjs.org/docs/code-splitting.html#route-based-code-splitting
-const { AboutPage } = lazily(() => import('./pages/informational/AboutPage'));
-const { HomePage } = lazily(() => import('./pages/informational/HomePage'));
-const { MissionPage } = lazily(() => import('./pages/informational/MissionPage'));
+const { AboutUsPage } = lazily(() => import('./pages/informational/AboutUsPage/AboutUsPage'));
+const { ContributePage } = lazily(() => import('./pages/informational/ContributePage/ContributePage'));
+const { FeaturesPage } = lazily(() => import('./pages/informational/FeaturesPage/FeaturesPage'));
+const { HomePage } = lazily(() => import('./pages/informational/HomePage/HomePage'));
 const { NotFoundPage } = lazily(() => import('./pages/NotFoundPage'));
-const { PrivacyPolicyPage } = lazily(() => import('./pages/informational/PrivacyPolicyPage'));
-const { TermsPage } = lazily(() => import('./pages/informational/TermsPage'));
+const { PrivacyPolicyPage } = lazily(() => import('./pages/informational/PrivacyPolicyPage/PrivacyPolicyPage'));
+const { TermsPage } = lazily(() => import('./pages/informational/TermsPage/TermsPage'));
 
 const Fallback = <Box sx={{
     position: 'absolute',
@@ -27,7 +27,7 @@ const Fallback = <Box sx={{
 
 const Routes = () => {
 
-    const title = useCallback((page: string) => `${page} | ${BusinessFields.BUSINESS_NAME}`, []);
+    const title = useCallback((page: string) => `${page} | ${BUSINESS_NAME}`, []);
 
     return (
         <>
@@ -48,26 +48,38 @@ const Routes = () => {
                     </Suspense>
                 </Route>
                 <Route
-                    path={LINKS.Mission}
+                    path={LINKS.Features}
                     sitemapIndex
                     priority={0.7}
                     changeFreq="monthly"
                 >
                     <Suspense fallback={Fallback}>
-                        <Page title={title('Mission')}>
-                            <MissionPage />
+                        <Page title={title('Features')}>
+                            <FeaturesPage />
                         </Page>
                     </Suspense>
                 </Route>
                 <Route
-                    path={LINKS.About}
+                    path={LINKS.Contribute}
+                    sitemapIndex
+                    priority={0.7}
+                    changeFreq="monthly"
+                >
+                    <Suspense fallback={Fallback}>
+                        <Page title={title('Contribute')}>
+                            <ContributePage />
+                        </Page>
+                    </Suspense>
+                </Route>
+                <Route
+                    path={LINKS.AboutUs}
                     sitemapIndex
                     priority={0.7}
                     changeFreq="monthly"
                 >
                     <Suspense fallback={Fallback}>
                         <Page title={title('About')}>
-                            <AboutPage />
+                            <AboutUsPage />
                         </Page>
                     </Suspense>
                 </Route>

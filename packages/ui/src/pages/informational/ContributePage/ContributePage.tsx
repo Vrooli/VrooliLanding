@@ -1,4 +1,4 @@
-import { APP_LINKS, BusinessFields, LANDING_LINKS, openLink } from 'utils';
+import { openLink } from 'utils';
 import Thinking from 'assets/img/thinking.png';
 import Target from 'assets/img/target.webp';
 import Mission from 'assets/img/rocket.webp';
@@ -8,8 +8,9 @@ import { useLocation } from '@shared/route';
 import { Slide } from 'components';
 import Particles from "react-tsparticles";
 import { CSSProperties } from 'react';
+import { APP_LINKS, APP_URL } from '@shared/consts';
 
-export const MissionPage = () => {
+export const ContributePage = () => {
     const [, setLocation] = useLocation();
 
     return (
@@ -171,8 +172,7 @@ export const MissionPage = () => {
                         We're building a future-friendly, open-source platform for automating entrepreneurship
                     </Typography>
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Benefits)}>The Benefits</Button>
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
+                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                     </Stack>
                 </Stack>
             </Box>
@@ -245,7 +245,7 @@ export const MissionPage = () => {
                     </Box>
                 </Stack>
                 <Stack direction="row" justifyContent="center" alignItems="center" pt={5} spacing={2}>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, "https://docs.google.com/document/d/1zHYdjAyy01SSFZX0O-YnZicef7t6sr1leOFnynQQOx4/edit?usp=sharing")}>White Paper</Button>
                 </Stack>
             </Slide>

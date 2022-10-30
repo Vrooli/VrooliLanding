@@ -1,11 +1,12 @@
 import MattSketch from 'assets/img/thought-sketch-edited-3.png';
 import { Slide } from 'components';
 import { Box, Button, Grid, Stack, Tooltip, Typography } from '@mui/material';
-import { BusinessFields, openLink } from 'utils';
+import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
 import { slideImageContainer, slideText, slideTitle } from 'styles';
+import { SOCIALS } from '@shared/consts';
 
-export const AboutPage = () => {
+export const AboutUsPage = () => {
     const [, setLocation] = useLocation();
     return (
         <Box id="page">
@@ -60,7 +61,7 @@ export const AboutPage = () => {
                 </Typography>
                 <Stack direction="row" justifyContent="center" alignItems="center">
                     <Tooltip title="Become part of our Discord community" placement="bottom">
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, BusinessFields.SOCIALS.Discord)}>Join Us</Button>
+                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, SOCIALS.Discord)}>Join Us</Button>
                     </Tooltip>
                 </Stack>
             </Slide>

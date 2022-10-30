@@ -1,5 +1,4 @@
-import { Slide } from 'components/Slide';
-import { APP_LINKS, BusinessFields, LANDING_LINKS } from 'utils/consts';
+import { Slide } from 'components/Slide/Slide';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import Relax from 'assets/img/relax.webp';
 import BlankRoutine from 'assets/img/blank-routine-1.png';
@@ -16,8 +15,9 @@ import StarfieldAnimation from 'react-starfield-animation';
 import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
+import { APP_LINKS, APP_URL, LANDING_LINKS } from '@shared/consts';
 
-const { YoutubeEmbed } = lazily(() => import('../../components/YoutubeEmbed'));
+const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
 
 // Hand wave animation
 const wave = keyframes`
@@ -114,8 +114,7 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
                 <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Mission)}>Learn More</Button>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
                 </Stack>
             </Slide>
 
@@ -183,8 +182,7 @@ export const HomePage = () => {
                         Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
                     </Typography>
                     <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${LANDING_LINKS.Mission}/#whats-the-catch`)}>What's the Catch?</Button>
+                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
                     </Stack>
                 </Stack>
             </Box>
@@ -236,7 +234,7 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
                 <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                 </Stack>
             </Slide>
 
@@ -276,7 +274,7 @@ export const HomePage = () => {
                     <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
                 </Suspense>
                 <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${BusinessFields.APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
                 </Stack>
             </Slide>

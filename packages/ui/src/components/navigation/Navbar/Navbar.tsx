@@ -6,12 +6,8 @@ import { NavList } from '../NavList/NavList';
 import { useLocation } from '@shared/route';
 import { HideOnScroll } from '../..';
 import { noSelect } from 'styles';
-import { NavbarProps } from '../types';
 
-export const Navbar = ({
-    session,
-    sessionChecked,
-}: NavbarProps) => {
+export const Navbar = () => {
     const { breakpoints, palette } = useTheme();
     const [, setLocation] = useLocation();
 
@@ -77,7 +73,7 @@ export const Navbar = ({
                         marginLeft: 'auto',
                         maxHeight: '100%',
                     }}>
-                        <NavList session={session} sessionChecked={sessionChecked} />
+                        <NavList />
                     </Box>
                 </Toolbar>
             </AppBar>

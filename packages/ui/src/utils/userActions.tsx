@@ -6,9 +6,8 @@ import {
     IconButton,
 } from '@mui/material';
 import { openLink } from 'utils';
-import { Session, SetLocation } from 'types';
-import { HelpIcon, HomeIcon, InfoIcon, OrganizationIcon, SvgComponent } from '@shared/icons';
-import { getCurrentUser, guestSession } from 'utils/authentication';
+import { SetLocation } from 'types';
+import { HelpIcon, HomeIcon, InfoIcon, LogInIcon, OrganizationIcon, SvgComponent } from '@shared/icons';
 
 export enum ACTION_TAGS {
     Home = 'Home',
@@ -28,17 +27,15 @@ export interface Action {
 
 // Returns navigational actions available to the user
 interface GetUserActionsProps {
-    session?: Session | null | undefined;
     exclude?: ACTION_TAGS[] | null | undefined;
 }
-export function getUserActions({ session = guestSession, exclude = [] }: GetUserActionsProps): Action[] {
-    const { id: userId } = getCurrentUser(session);
+export function getUserActions({ exclude = [] }: GetUserActionsProps): Action[] {
     const actions: ActionArray[] = [
         ['Home', ACTION_TAGS.Home, LANDING_LINKS.Home, HomeIcon],
         ['Contribute', ACTION_TAGS.Contribute, LANDING_LINKS.Contribute, OrganizationIcon],
         ['Features', ACTION_TAGS.Features, LANDING_LINKS.Features, HelpIcon],
         ['About Us', ACTION_TAGS.AboutUs, LANDING_LINKS.AboutUs, InfoIcon],
-        ['Start', ACTION_TAGS.Start, APP_LINKS.Start, SearchIcon],
+        ['Start', ACTION_TAGS.Start, APP_LINKS.Start, LogInIcon],
     ]
     return actions.map(a => createAction(a)).filter(a => !(exclude ?? []).includes(a.value));
 }
@@ -94,6 +91,7 @@ export const actionsToBottomNav = ({ actions, setLocation }: ActionsToBottomNavP
                 // Otherwise, navigate to link
                 else openLink(setLocation, link);
             }}
+            icon={<Icon />}
             sx={{ color: 'white' }}
         />
     ));
