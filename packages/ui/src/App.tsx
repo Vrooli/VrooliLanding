@@ -20,7 +20,6 @@ const useStyles = makeStyles(() => ({
         '#page': {
             minWidth: '100%',
             minHeight: '100%',
-            marginTop: '10vh',
         },
         '@font-face': {
             fontFamily: 'Lato',
@@ -50,12 +49,44 @@ const useStyles = makeStyles(() => ({
 
 export function App() {
     useStyles();
-    const [theme, setTheme] = useState(themes.light);
+    const [theme, setTheme] = useState(themes.dark);
 
     useEffect(() => {
-        //if (session && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(themes.dark);
-        setTheme(themes.light);
+        setTheme(themes.dark);
     }, [])
+
+    useEffect(() => {
+        // Add help wanted to console logs
+        console.log(`
+               @@@                 @@@                  
+            @@     @@           @@     @@               
+           @@       @@         @@       @@              
+            @@     @@           @@     @@               
+               @@@   @@        @   @@@                  
+                        @   @@                   @@@      
+                         @@                   @@     @@
+                         @@             @@@@@@@       @@
+            @@           @@          @@       @@     @@
+    @@@  @@    @@    @@@    @@@   @@             @@@ 
+ @@     @@         @@          @@                     
+@@       @@       @@            @@                                  
+ @@     @@        @             @@@@@@@@@@                Consider developing with us!  
+    @@@           @@            @@        @@@@@           https://github.com/Vrooli/Vrooli
+                   @@          @@                @      
+                     @@@    @@@                  @      
+                         @@                     @@@   
+       @@@              @@@@                 @@     @@  
+    @@     @@@@@@@@@@@@      @@             @@       @@ 
+   @@       @@      @@        @@             @@     @@ 
+    @@     @@        @@      @@                 @@@           
+       @@@              @@@@                             
+                         @@ 
+                       @@@@@@                        
+                     @@      @@                        
+                     @@      @@                        
+                       @@@@@@  
+        `)
+    }, []);
 
     return (
         <StyledEngineProvider injectFirst>

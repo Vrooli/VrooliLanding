@@ -1,13 +1,15 @@
-// Automatically determines whether to open a link in a new tab, or push to history.
-// This is useful for a list of links, where some may lead to the landing page, while
-import { Path } from "@shared/route";
+import { SetLocation } from "types";
 
-// others lead to the main application
-export const openLink = (setLocation: (to: Path, options?: { replace?: boolean }) => void, link: string) => {
+/**
+ * Opens link using routing or a new tab, depending on the link
+ * @param setLocation Function to set location in the router
+ * @param link Link to open
+ */
+export const openLink = (setLocation: SetLocation, link: string) => {
     // If link is external, open new tab
-    if (link.includes('http:') || link.includes('https')) {
+    if ((link.includes('http:') || link.includes('https:')) && !link.startsWith(window.location.origin)) {
         window.open(link, '_blank', 'noopener,noreferrer');
-    } 
+    }
     // Otherwise, push to history
     else {
         setLocation(link);

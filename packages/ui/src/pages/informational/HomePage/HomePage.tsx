@@ -16,6 +16,8 @@ import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
 import { APP_LINKS, APP_URL, LANDING_LINKS } from '@shared/consts';
+import { SlideContainer, SlideContent } from 'components';
+import Neuropol from '../../../assets/font/Neuropol.woff';
 
 const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
 
@@ -34,12 +36,31 @@ const wave = keyframes`
     transform: rotate(0deg);
   }
 `;
+// Pulsing border animation
+const pulse = keyframes`
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 255, 170, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 170, 0);
+    }
+`;
+
 const RotatedBox = styled("div")({
     display: 'inline-block',
     width: 60,
     height: 60,
     animation: `${wave} 3s infinite ease`
 });
+const blueRadial = 'radial-gradient(circle, rgba(14,10,93,1) 0%, rgba(16,13,73,1) 55%, rgba(2,0,36,1) 100%)'
+const blackRadial = 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)'
+const greenNeonText = {
+    color: '#fff',
+    textShadow: '0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa',
+}
 
 export const HomePage = () => {
     const [, setLocation] = useLocation();
@@ -55,71 +76,47 @@ export const HomePage = () => {
     })
 
     return (
-        <Box sx={{ paddingTop: '10vh' }}>
-
-            <Slide id="get-things-done-easy" isFirst={true} sx={{ color: 'white', background: 'radial-gradient(circle, rgb(29 29 113) 12%, rgb(25 25 83) 52%, rgb(17 17 66) 80%)' }}>
-                {/* Wave backgrounds. Made with https://web.archive.org/web/20180810082435/https://smooth.ie/blogs/news/svg-wavey-transitions-between-sections */}
-                <Box sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '250px',
-                    overflow: 'hidden'
-                }} >
-                    <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
-                        <path d="M-15.52,43.92 C213.60,165.30 416.76,-60.67 555.58,45.89 L500.00,150.00 L0.00,150.00 Z" style={{ stroke: 'none', fill: '#12326a' }}>
-                        </path>
-                    </svg>
-                </Box>
-                <Box sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '250px',
-                    overflow: 'hidden'
-                }} >
-                    <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
-                        <path d="M-51.38,119.23 C235.78,95.55 270.03,-9.05 514.94,99.50 L500.00,150.00 L0.00,150.00 Z" style={{ stroke: 'none', fill: '#1b4184' }}>
-                        </path>
-                    </svg>
-                </Box>
-                <Box sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '250px',
-                    overflow: 'hidden'
-                }} >
-                    <svg viewBox="0 0 500 150" preserveAspectRatio="none" style={{ height: '100%', width: '100%' }}>
-                        <path d="M-51.38,119.23 C260.57,138.97 362.61,2.80 530.98,79.75 L500.00,150.00 L0.00,150.00 Z" style={{ stroke: 'none', fill: '#375fa4' }}>
-                        </path>
-                    </svg>
-                </Box>
-                <Typography component="h1" sx={{ ...slideTitle }}>
-                    Become an Entrepreneur — Without the Hassle!
-                </Typography>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} margin="auto">
-                        <Typography component="h2" variant="h5" sx={{ ...slideText }}>
-                            Accomplish your goals in a few clicks, through the power of visual work routines
-                        </Typography>
+        <Box>
+            <SlideContainer id="an-open-source-economy" sx={{
+                background: blackRadial,
+                color: 'white',
+                // Set custom font
+                fontFamily: 'Neuropol',
+                // '@font-face': {
+                //     fontFamily: 'Neuropol',
+                //     src: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
+                //     fontDisplay: 'swap',
+                // },
+                // fontFamily: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
+            }}>
+                <SlideContent>
+                    <Typography component="h1" sx={{ ...slideTitle, ...greenNeonText, fontWeight: 'bold' }}>
+                        An Open-Source Economy
+                    </Typography>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6} margin="auto">
+                            <Typography component="h2" variant="h5" sx={{ ...slideText }}>
+                                We're building the tools to prototype and automate the future of work
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
+                            <Box sx={{ ...slideImageContainer }}>
+                                <img alt="Man relaxing at beach - by Vecteezy" src={Relax} />
+                            </Box>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
-                        <Box sx={{ ...slideImageContainer }}>
-                            <img alt="Man relaxing at beach - by Vecteezy" src={Relax} />
-                        </Box>
-                    </Grid>
-                </Grid>
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
-                </Stack>
-            </Slide>
-
-            <Slide id="routine-explanation" sx={{ background: 'radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)' }}>
-                <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>A <Box fontStyle="italic" display="inline">What</Box> Routine?</Typography>
+                    <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+                        <Button size="large" variant="outlined" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)} sx={{
+                            // Button border has neon green glow animation
+                            animation: `${pulse} 3s infinite ease`,
+                            borderColor: '#0fa',
+                            color: '#0fa',
+                        }}>Get Started</Button>
+                    </Stack>
+                </SlideContent>
+            </SlideContainer>
+            <Slide id="routine-explanation" sx={{ background: blueRadial }}>
+                <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>How it Works</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     A visual work routine is an intuitive process for completing a specific task —
                     similar to a flowchart
@@ -144,35 +141,23 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-
-
-
-            {/* Custom slide to handle star animation */}
-            <Box
-                id="building-blocks"
-                key="building-blocks"
-                sx={{
-                    position: 'relative',
-                    display: 'flex',
-                    overflowX: 'hidden',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    minHeight: { xs: 'calc(102vh - 56px)', md: '102vh' },
-                    color: 'white',
-                    background: 'radial-gradient(circle, rgb(13 13 79) 12%, rgb(13 13 69) 52%, rgb(11 11 57) 80%)'
-                }}
-            >
-                <StarfieldAnimation style={{ position: 'absolute', width: '100%', height: '100%' }} />
-                <Stack
-                    direction="column"
-                    spacing={2}
-                    p={4}
-                    textAlign="center"
-                    zIndex={1}
-                    sx={{
-                        maxWidth: { xs: '100vw', sm: '90vw', md: 'min(80vw, 1000px)' },
-                    }}
-                >
+            <SlideContainer id="sky-is-limit" sx={{
+                background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
+                color: 'white',
+                '@font-face': {
+                    fontFamily: 'Neuropol',
+                    src: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
+                    fontDisplay: 'swap',
+                },
+                // fontFamily: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
+            }}>
+                <StarfieldAnimation
+                    numParticles={1000}
+                    lineWidth={2}
+                    depth={1000}
+                    style={{ position: 'absolute', width: '100%', height: '100%' }}
+                />
+                <SlideContent>
                     <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
                     <Typography variant="h5" sx={{ ...slideText }}>
                         Connect routines like building blocks to create more complex routines, which can themselves
@@ -184,10 +169,9 @@ export const HomePage = () => {
                     <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
                         <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
                     </Stack>
-                </Stack>
-            </Box>
-
-            <Slide id="auto-generated-interfaces" sx={{ background: 'radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)' }}>
+                </SlideContent>
+            </SlideContainer>
+            <Slide id="auto-generated-interfaces" sx={{ background: blueRadial }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
                     Say Goodbye to Endless Browser Tabs
                     <RotatedBox>👋</RotatedBox>
@@ -215,7 +199,7 @@ export const HomePage = () => {
                 </Grid>
             </Slide>
 
-            <Slide id="fund-your-idea" sx={{ color: 'white', background: 'radial-gradient(circle, rgb(29 29 113) 12%, rgb(25 25 83) 52%, rgb(17 17 66) 80%)' }}>
+            <Slide id="fund-your-idea" sx={{ color: 'white', background: blackRadial }}>
                 <Typography variant="h2" sx={{ ...slideTitle }}>
                     Build with the community
                 </Typography>
@@ -238,7 +222,7 @@ export const HomePage = () => {
                 </Stack>
             </Slide>
 
-            <Slide id="blockchain" sx={{ background: 'radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)' }}>
+            <Slide id="blockchain" sx={{ background: blueRadial }}>
                 <Typography variant="h2" sx={{ ...slideTitle }}>
                     Not Just for Prototypes...
                 </Typography>
@@ -259,8 +243,8 @@ export const HomePage = () => {
                 </Grid>
             </Slide>
 
-            <Slide id="join-the-movement" sx={{ 
-                color: 'white', 
+            <Slide id="join-the-movement" sx={{
+                color: 'white',
                 background: `url(${World}) no-repeat center center`,
                 backgroundSize: 'cover',
             }}>

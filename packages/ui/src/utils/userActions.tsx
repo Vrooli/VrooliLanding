@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
-import { APP_LINKS, LANDING_LINKS } from '@shared/consts';
+import { APP_LINKS, APP_URL, LANDING_LINKS } from '@shared/consts';
 import {
     BottomNavigationAction,
     Button,
@@ -35,7 +35,7 @@ export function getUserActions({ exclude = [] }: GetUserActionsProps): Action[] 
         ['Contribute', ACTION_TAGS.Contribute, LANDING_LINKS.Contribute, OrganizationIcon],
         ['Features', ACTION_TAGS.Features, LANDING_LINKS.Features, HelpIcon],
         ['About Us', ACTION_TAGS.AboutUs, LANDING_LINKS.AboutUs, InfoIcon],
-        ['Start', ACTION_TAGS.Start, APP_LINKS.Start, LogInIcon],
+        ['Start', ACTION_TAGS.Start, `${APP_URL}${APP_LINKS.Start}`, LogInIcon],
     ]
     return actions.map(a => createAction(a)).filter(a => !(exclude ?? []).includes(a.value));
 }

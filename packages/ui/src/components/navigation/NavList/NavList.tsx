@@ -2,7 +2,7 @@ import { Action, actionsToMenu, ACTION_TAGS, getUserActions, openLink, useWindow
 import { Button, Container, Palette, useTheme } from '@mui/material';
 import { useLocation } from '@shared/route';
 import { useMemo } from 'react';
-import { APP_LINKS } from '@shared/consts';
+import { APP_LINKS, APP_URL } from '@shared/consts';
 import { LogInIcon } from '@shared/icons';
 
 const navItemStyle = (palette: Palette) => ({
@@ -38,8 +38,8 @@ export const NavList = () => {
             })}
             {/* Start button */}
             <Button
-                href={APP_LINKS.Start}
-                onClick={(e) => { e.preventDefault(); openLink(setLocation, APP_LINKS.Start) }}
+                href={`${APP_URL}${APP_LINKS.Start}`}
+                onClick={(e) => { e.preventDefault(); openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`) }}
                 startIcon={<LogInIcon />}
                 sx={{
                     background: '#387e30',

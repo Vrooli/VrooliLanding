@@ -15,7 +15,7 @@ export const FeaturesPage = () => {
 
     return (
         <Box id="page">
-            <Slide id="the-problem" isFirst={true} sx={{ color: 'white', background: 'radial-gradient(circle, rgb(29 29 113) 12%, rgb(25 25 83) 52%, rgb(17 17 66) 80%)' }}>
+            <Slide id="the-problem" sx={{ color: 'white', background: 'radial-gradient(circle, rgb(29 29 113) 12%, rgb(25 25 83) 52%, rgb(17 17 66) 80%)' }}>
                 <Typography variant='h2' component="h1" pb={4} sx={{ ...slideTitle, paddingTop: { xs: 16, sm: 0 } }}>The Problem</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Project Catalyst will empower the masses with governance, but this system is not perfect...
@@ -71,7 +71,7 @@ export const FeaturesPage = () => {
                     overflowX: 'hidden',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    minHeight: { xs: 'calc(102vh - 56px)', md: '102vh' },
+                    minHeight: '100vh',
                     color: 'white',
                     background: 'linear-gradient(-46deg,#713a63,#601f6f,#023d87,#69d7d2) 50%/cover no-repeat fixed;',
                     backgroundSize: '400% 400%',
