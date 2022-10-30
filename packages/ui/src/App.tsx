@@ -9,6 +9,7 @@ import { Routes } from 'Routes';
 import { Box, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import SakBunderan from './assets/font/SakBunderan.woff';
+import Neuropol from './assets/font/Neuropol.woff';
 
 const useStyles = makeStyles(() => ({
     "@global": {
@@ -21,11 +22,16 @@ const useStyles = makeStyles(() => ({
             minWidth: '100%',
             minHeight: '100%',
         },
-        '@font-face': {
+        // Add custom fonts
+        '@font-face': [{
             fontFamily: 'Lato',
             src: `local('Lato'), url(${SakBunderan}) format('truetype')`,
             fontDisplay: 'swap',
-        },
+        }, {
+            fontFamily: 'Neuropol',
+            src: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
+            fontDisplay: 'swap',
+        }],
         '.slideList': {
             '& li': {
                 listStyleType: 'circle',

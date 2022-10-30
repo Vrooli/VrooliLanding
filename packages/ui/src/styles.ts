@@ -55,3 +55,6 @@ export const translucentContainer: SxProps = {
     userSelect: 'none', /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
 };
+
+export const blueRadial = 'radial-gradient(circle, rgba(14,10,93,1) 0%, rgba(16,13,73,1) 55%, rgba(2,0,36,1) 100%)'
+export const blackRadial = 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)'

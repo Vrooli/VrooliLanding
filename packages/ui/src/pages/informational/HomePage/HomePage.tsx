@@ -1,4 +1,4 @@
-import { Slide } from 'components/Slide/Slide';
+import { Slide } from 'components/slides/Slide/Slide';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import Relax from 'assets/img/relax.webp';
 import BlankRoutine from 'assets/img/blank-routine-1.png';
@@ -8,7 +8,7 @@ import Blockchain from 'assets/img/blockchain.webp';
 import World from 'assets/img/world.png';
 import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
-import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
+import { blackRadial, blueRadial, slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { Suspense, useEffect, useState } from 'react';
 import StarfieldAnimation from 'react-starfield-animation';
@@ -17,7 +17,7 @@ import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
 import { APP_LINKS, APP_URL, LANDING_LINKS } from '@shared/consts';
 import { SlideContainer, SlideContent } from 'components';
-import Neuropol from '../../../assets/font/Neuropol.woff';
+import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
 
 const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
 
@@ -48,6 +48,27 @@ const pulse = keyframes`
         box-shadow: 0 0 0 0 rgba(0, 255, 170, 0);
     }
 `;
+// Flickering light animation. Flickers a few times in the beginning, then stays on for a while
+const flicker = keyframes`
+    0% {
+        opacity: 0;
+    }
+    2.5% {
+        opacity: 1;
+    }
+    3.5% {
+        opacity: 0.4;
+    }
+    5% {
+        opacity: 1;
+    }
+    6% {
+        opacity: 0.7;
+    }
+    6.9% {
+        opacity: 1;
+    }
+`;
 
 const RotatedBox = styled("div")({
     display: 'inline-block',
@@ -55,8 +76,7 @@ const RotatedBox = styled("div")({
     height: 60,
     animation: `${wave} 3s infinite ease`
 });
-const blueRadial = 'radial-gradient(circle, rgba(14,10,93,1) 0%, rgba(16,13,73,1) 55%, rgba(2,0,36,1) 100%)'
-const blackRadial = 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)'
+
 const greenNeonText = {
     color: '#fff',
     textShadow: '0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa',
@@ -77,44 +97,44 @@ export const HomePage = () => {
 
     return (
         <Box>
-            <SlideContainer id="an-open-source-economy" sx={{
-                background: blackRadial,
-                color: 'white',
-                // Set custom font
-                fontFamily: 'Neuropol',
-                // '@font-face': {
-                //     fontFamily: 'Neuropol',
-                //     src: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
-                //     fontDisplay: 'swap',
-                // },
-                // fontFamily: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
-            }}>
+            <SlideContainerNeon id="an-open-source-economy">
                 <SlideContent>
-                    <Typography component="h1" sx={{ ...slideTitle, ...greenNeonText, fontWeight: 'bold' }}>
+                    <Typography component="h1" sx={{
+                        ...slideTitle,
+                        ...greenNeonText,
+                        fontFamily: 'Neuropol',
+                        fontWeight: 'bold',
+                        animation: `${flicker} 10s infinite ease-in-out`,
+                    }}>
                         An Open-Source Economy
                     </Typography>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} margin="auto">
-                            <Typography component="h2" variant="h5" sx={{ ...slideText }}>
+                        <Grid item xs={12} margin="auto" sx={{ marginTop: 4, marginBottom: 4 }}>
+                            <Typography component="h2" variant="h5" sx={{ ...slideText, textAlign: 'center' }}>
                                 We're building the tools to prototype and automate the future of work
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
-                            <Box sx={{ ...slideImageContainer }}>
-                                <img alt="Man relaxing at beach - by Vecteezy" src={Relax} />
-                            </Box>
-                        </Grid>
                     </Grid>
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                        <Button size="large" variant="outlined" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)} sx={{
+                        <Button variant="outlined" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)} sx={{
+                            fontSize: '1.3rem',
                             // Button border has neon green glow animation
                             animation: `${pulse} 3s infinite ease`,
                             borderColor: '#0fa',
                             color: '#0fa',
+                            // On hover, brighten and grow
+                            '&:hover': {
+                                borderColor: '#0fa',
+                                color: '#0fa',
+                                background: 'transparent',
+                                filter: 'brightness(1.2)',
+                                transform: 'scale(1.05)',
+                            },
+                            transition: 'all 0.2s ease',
                         }}>Get Started</Button>
                     </Stack>
                 </SlideContent>
-            </SlideContainer>
+            </SlideContainerNeon>
             <Slide id="routine-explanation" sx={{ background: blueRadial }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>How it Works</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
@@ -144,12 +164,6 @@ export const HomePage = () => {
             <SlideContainer id="sky-is-limit" sx={{
                 background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
                 color: 'white',
-                '@font-face': {
-                    fontFamily: 'Neuropol',
-                    src: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
-                    fontDisplay: 'swap',
-                },
-                // fontFamily: `local('Neuropol'), url(${Neuropol}) format('truetype')`,
             }}>
                 <StarfieldAnimation
                     numParticles={1000}

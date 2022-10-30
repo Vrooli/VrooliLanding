@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { SlideContainerProps } from 'components/types';
+import { SlideContainerProps } from '../types';
 
 export const SlideContainer = ({
     id,

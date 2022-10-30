@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { SlideContentProps } from 'components/types';
+import { SlideContentProps } from '../types';
 
 export const SlideContent = ({
     children,
