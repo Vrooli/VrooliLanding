@@ -2,6 +2,7 @@ export * from './ActionIcon';
 export * from './AddIcon';
 export * from './ArrowDropDownIcon';
 export * from './ArrowDropUpIcon';
+export * from './ArticleIcon';
 export * from './CancelIcon';
 export * from './CelebrateIcon';
 export * from './CloseIcon';

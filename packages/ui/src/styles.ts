@@ -15,7 +15,7 @@ export const textPop: SxProps = {
 
 export const slideTitle: SxProps = {
     textAlign: 'center',
-    fontSize: { xs: '2em', sm: '3rem', md: '3.75rem' },
+    fontSize: { xs: '2.4em', sm: '3rem', md: '3.75rem' },
 };
 
 export const slideText: SxProps = {

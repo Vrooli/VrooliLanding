@@ -8,7 +8,7 @@ import { useLocation } from '@shared/route';
 import { Slide } from 'components';
 import Particles from "react-tsparticles";
 import { CSSProperties } from 'react';
-import { APP_LINKS, APP_URL } from '@shared/consts';
+import { APP_LINKS, APP_URL, WHITE_PAPER_URL } from '@shared/consts';
 
 export const FeaturesPage = () => {
     const [, setLocation] = useLocation();
@@ -57,7 +57,7 @@ export const FeaturesPage = () => {
                     </Grid>
                 </Grid>
                 <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, "https://docs.google.com/document/d/1zHYdjAyy01SSFZX0O-YnZicef7t6sr1leOFnynQQOx4/edit?usp=sharing")}>White Paper</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, WHITE_PAPER_URL)}>White Paper</Button>
                 </Stack>
             </Slide>
 
@@ -246,7 +246,7 @@ export const FeaturesPage = () => {
                 </Stack>
                 <Stack direction="row" justifyContent="center" alignItems="center" pt={5} spacing={2}>
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, "https://docs.google.com/document/d/1zHYdjAyy01SSFZX0O-YnZicef7t6sr1leOFnynQQOx4/edit?usp=sharing")}>White Paper</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, WHITE_PAPER_URL)}>White Paper</Button>
                 </Stack>
             </Slide>
         </Box>

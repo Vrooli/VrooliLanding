@@ -8,7 +8,7 @@ export const SlideContent = ({
         <Stack
             direction="column"
             spacing={2}
-            p={4}
+            p={2}
             textAlign="center"
             zIndex={1}
             sx={{

@@ -1,6 +1,5 @@
 import { Slide } from 'components/slides/Slide/Slide';
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
-import Relax from 'assets/img/relax.webp';
+import { Box, Button, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import BlankRoutine from 'assets/img/blank-routine-1.png';
 import MonkeyCoin from 'assets/img/monkey-coin-page.png';
 import Community from 'assets/img/community.svg';
@@ -15,9 +14,10 @@ import StarfieldAnimation from 'react-starfield-animation';
 import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
-import { APP_LINKS, APP_URL, LANDING_LINKS } from '@shared/consts';
+import { APP_LINKS, APP_URL, LANDING_LINKS, SOCIALS, WHITE_PAPER_URL } from '@shared/consts';
 import { SlideContainer, SlideContent } from 'components';
 import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
+import { ArticleIcon, DiscordIcon, GitHubIcon, TwitterIcon } from '@shared/icons';
 
 const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
 
@@ -82,6 +82,17 @@ const greenNeonText = {
     textShadow: '0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa',
 }
 
+const iconButtonProps = {
+    background: 'transparent',
+    border: '1px solid #0fa',
+    '&:hover': {
+        background: 'transparent',
+        filter: 'brightness(1.2)',
+        transform: 'scale(1.2)',
+    },
+    transition: 'all 0.2s ease',
+}
+
 export const HomePage = () => {
     const [, setLocation] = useLocation();
 
@@ -115,23 +126,48 @@ export const HomePage = () => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                        <Button variant="outlined" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)} sx={{
-                            fontSize: '1.3rem',
-                            // Button border has neon green glow animation
-                            animation: `${pulse} 3s infinite ease`,
+                    {/* Start button */}
+                    <Button variant="outlined" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)} sx={{
+                        fontSize: '1.3rem',
+                        // Button border has neon green glow animation
+                        animation: `${pulse} 3s infinite ease`,
+                        borderColor: '#0fa',
+                        color: '#0fa',
+                        width: 'fit-content',
+                        marginLeft: 'auto !important',
+                        marginRight: 'auto !important',
+                        // On hover, brighten and grow
+                        '&:hover': {
                             borderColor: '#0fa',
                             color: '#0fa',
-                            // On hover, brighten and grow
-                            '&:hover': {
-                                borderColor: '#0fa',
-                                color: '#0fa',
-                                background: 'transparent',
-                                filter: 'brightness(1.2)',
-                                transform: 'scale(1.05)',
-                            },
-                            transition: 'all 0.2s ease',
-                        }}>Get Started</Button>
+                            background: 'transparent',
+                            filter: 'brightness(1.2)',
+                            transform: 'scale(1.05)',
+                        },
+                        transition: 'all 0.2s ease',
+                    }}>Get Started</Button>
+                    {/* Icon buttons for White paper, GitHub, Twitter, and Discord */}
+                    <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center" sx={{ paddingTop: 8 }}>
+                        <Tooltip title="Read the white Paper" placement="bottom">
+                            <IconButton onClick={() => openLink(setLocation, WHITE_PAPER_URL)} sx={iconButtonProps}>
+                                <ArticleIcon fill='#0fa' />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Check out our code" placement="bottom">
+                            <IconButton onClick={() => openLink(setLocation, SOCIALS.GitHub)} sx={iconButtonProps}>
+                                <GitHubIcon fill='#0fa' />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Follow us on Twitter" placement="bottom">
+                            <IconButton onClick={() => openLink(setLocation, SOCIALS.Twitter)} sx={iconButtonProps}>
+                                <TwitterIcon fill='#0fa' />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Join us on Discord" placement="bottom">
+                            <IconButton onClick={() => openLink(setLocation, SOCIALS.Discord)} sx={iconButtonProps}>
+                                <DiscordIcon fill='#0fa' />
+                            </IconButton>
+                        </Tooltip>
                     </Stack>
                 </SlideContent>
             </SlideContainerNeon>
@@ -181,7 +217,15 @@ export const HomePage = () => {
                         Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
                     </Typography>
                     <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Get Started</Button>
+                        <Button
+                            size="large"
+                            color="secondary"
+                            href={`${APP_URL}${APP_LINKS.Start}`}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`);
+                            }}
+                        >Get Started</Button>
                     </Stack>
                 </SlideContent>
             </SlideContainer>
