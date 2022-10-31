@@ -4,6 +4,7 @@ import { SlideContainerNeonProps } from '../types';
 import Blob1 from '../../../assets/img/blob1.svg';
 import Blob2 from '../../../assets/img/blob2.svg';
 import { Box, keyframes } from '@mui/material';
+import Particles from "react-tsparticles";
 
 // Animation for blob1
 // Moves up and grows, then moves down to the right and shrinks.
@@ -56,6 +57,8 @@ export const SlideContainerNeon = ({
 
     return (
         <SlideContainer
+            hasPrevious={false}
+            hasNext={true}
             id={id}
             key={id}
             sx={{
@@ -65,6 +68,87 @@ export const SlideContainerNeon = ({
                 ...sx
             }}
         >
+            {/* Constellation */}
+            <Box sx={{ position: 'absolute', width: '100%', height: '100%', opacity: 0.5 }} >
+                {/* @ts-ignore TODO */}
+                <Particles
+                    id="tsparticles"
+                    canvasClassName="tsparticles-canvas"
+                    options={{
+                        fullScreen: { enable: false, zIndex: 0 },
+                        fpsLimit: 60,
+                        interactivity: {
+                            events: {
+                                onClick: {
+                                    enable: true,
+                                    mode: "push",
+                                },
+                                onHover: {
+                                    enable: true,
+                                    mode: "repulse",
+                                },
+                                resize: true,
+                            },
+                            modes: {
+                                bubble: {
+                                    distance: 400,
+                                    duration: 2,
+                                    opacity: 0.8,
+                                    size: 40,
+                                },
+                                push: {
+                                    quantity: 4,
+                                },
+                                repulse: {
+                                    distance: 50,
+                                    duration: 5,
+                                },
+                            },
+                        },
+                        particles: {
+                            color: {
+                                value: "#ffffff",
+                            },
+                            links: {
+                                color: "#ffffff",
+                                distance: 150,
+                                enable: true,
+                                opacity: 0.5,
+                                width: 1,
+                            },
+                            collisions: {
+                                enable: true,
+                            },
+                            move: {
+                                direction: "none",
+                                enable: true,
+                                outMode: "bounce",
+                                random: false,
+                                speed: 0.3,
+                                straight: false,
+                            },
+                            number: {
+                                density: {
+                                    enable: true,
+                                    area: 800,
+                                },
+                                value: 120,
+                            },
+                            opacity: {
+                                value: 0.5,
+                            },
+                            shape: {
+                                type: "circle",
+                            },
+                            size: {
+                                random: true,
+                                value: 5,
+                            },
+                        },
+                        detectRetina: true,
+                    }}
+                />
+            </Box>
             {/* Blob 1 */}
             <Box sx={{
                 position: 'absolute',

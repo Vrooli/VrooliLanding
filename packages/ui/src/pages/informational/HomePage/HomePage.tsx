@@ -171,7 +171,7 @@ export const HomePage = () => {
                     </Stack>
                 </SlideContent>
             </SlideContainerNeon>
-            <Slide id="routine-explanation" sx={{ background: blueRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id="routine-explanation" sx={{ background: blackRadial }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>How it Works</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     A visual work routine is an intuitive process for completing a specific task —
@@ -197,7 +197,7 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-            <SlideContainer id="sky-is-limit" sx={{
+            <SlideContainer hasPrevious={true} hasNext={true} id="sky-is-limit" sx={{
                 background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
                 color: 'white',
             }}>
@@ -229,7 +229,7 @@ export const HomePage = () => {
                     </Stack>
                 </SlideContent>
             </SlideContainer>
-            <Slide id="auto-generated-interfaces" sx={{ background: blueRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id="auto-generated-interfaces" sx={{ background: blackRadial }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
                     Say Goodbye to Endless Browser Tabs
                     <RotatedBox>👋</RotatedBox>
@@ -256,10 +256,9 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-
-            <Slide id="fund-your-idea" sx={{ color: 'white', background: blackRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id="fund-your-idea" sx={{ color: 'white', background: blackRadial }}>
                 <Typography variant="h2" sx={{ ...slideTitle }}>
-                    Build with the community
+                    Collaborate, or Fly Solo
                 </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} margin="auto">
@@ -279,35 +278,13 @@ export const HomePage = () => {
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                 </Stack>
             </Slide>
-
-            <Slide id="blockchain" sx={{ background: blueRadial }}>
-                <Typography variant="h2" sx={{ ...slideTitle }}>
-                    Not Just for Prototypes...
-                </Typography>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={5} sx={{ paddingLeft: '0 !important' }}>
-                        <Box sx={{ ...slideImageContainer }}>
-                            <img alt="Blockchain illustration - by Vecteezy" src={Blockchain} />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={7} margin="auto">
-                        <Stack direction="column" spacing={2}>
-                            <Typography variant="h5" sx={{ ...slideText }}>
-                                Routines will be able to trigger smart contracts, bringing the power of the
-                                Cardano blockchain to your fingertips. Coming later this year
-                            </Typography>
-                        </Stack>
-                    </Grid>
-                </Grid>
-            </Slide>
-
-            <Slide id="join-the-movement" sx={{
+            <Slide hasPrevious={true} hasNext={false} id="join-the-movement" sx={{
                 color: 'white',
                 background: `url(${World}) no-repeat center center`,
                 backgroundSize: 'cover',
             }}>
                 <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
-                    Join the Movement
+                    Ready to Change the World?
                 </Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Vrooli is live! Let's change the world together!💙
