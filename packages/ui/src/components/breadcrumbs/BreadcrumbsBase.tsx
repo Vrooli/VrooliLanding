@@ -21,7 +21,8 @@ export const BreadcrumbsBase = ({
             <Link
                 key={p.text}
                 color={textColor}
-                onClick={() => openLink(setLocation, p.link)}
+                href={p.link}
+                onClick={(e) => { e.preventDefault(); openLink(setLocation, p.link) }}
             >
                 {window.location.pathname === p.link ? <b>{p.text}</b> : p.text}
             </Link>

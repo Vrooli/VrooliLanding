@@ -3,11 +3,10 @@ import { Box, Button, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/
 import BlankRoutine from 'assets/img/blank-routine-1.png';
 import MonkeyCoin from 'assets/img/monkey-coin-page.png';
 import Community from 'assets/img/community.svg';
-import Blockchain from 'assets/img/blockchain.webp';
 import World from 'assets/img/world.png';
 import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
-import { blackRadial, blueRadial, slideImageContainer, slideText, slideTitle, textPop } from 'styles';
+import { blackRadial, slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { Suspense, useEffect, useState } from 'react';
 import StarfieldAnimation from 'react-starfield-animation';
@@ -46,27 +45,6 @@ const pulse = keyframes`
     }
     100% {
         box-shadow: 0 0 0 0 rgba(0, 255, 170, 0);
-    }
-`;
-// Flickering light animation. Flickers a few times in the beginning, then stays on for a while
-const flicker = keyframes`
-    0% {
-        opacity: 0;
-    }
-    2.5% {
-        opacity: 1;
-    }
-    3.5% {
-        opacity: 0.4;
-    }
-    5% {
-        opacity: 1;
-    }
-    6% {
-        opacity: 0.7;
-    }
-    6.9% {
-        opacity: 1;
     }
 `;
 
@@ -115,7 +93,6 @@ export const HomePage = () => {
                         ...greenNeonText,
                         fontFamily: 'Neuropol',
                         fontWeight: 'bold',
-                        animation: `${flicker} 10s infinite ease-in-out`,
                     }}>
                         An Open-Source Economy
                     </Typography>
@@ -197,38 +174,6 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-            <SlideContainer hasPrevious={true} hasNext={true} id="sky-is-limit" sx={{
-                background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
-                color: 'white',
-            }}>
-                <StarfieldAnimation
-                    numParticles={1000}
-                    lineWidth={2}
-                    depth={1000}
-                    style={{ position: 'absolute', width: '100%', height: '100%' }}
-                />
-                <SlideContent>
-                    <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
-                    <Typography variant="h5" sx={{ ...slideText }}>
-                        Connect routines like building blocks to create more complex routines, which can themselves
-                        be used to create even more complex routines
-                    </Typography>
-                    <Typography variant="h5" sx={{ ...slideText }}>
-                        Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
-                    </Typography>
-                    <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
-                        <Button
-                            size="large"
-                            color="secondary"
-                            href={`${APP_URL}${APP_LINKS.Start}`}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`);
-                            }}
-                        >Get Started</Button>
-                    </Stack>
-                </SlideContent>
-            </SlideContainer>
             <Slide hasPrevious={true} hasNext={true} id="auto-generated-interfaces" sx={{ background: blackRadial }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
                     Say Goodbye to Endless Browser Tabs
@@ -278,25 +223,57 @@ export const HomePage = () => {
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                 </Stack>
             </Slide>
-            <Slide hasPrevious={true} hasNext={false} id="join-the-movement" sx={{
+            {/* Double slide */}
+            <SlideContainer hasPrevious={true} hasNext={false} id="sky-is-limit" sx={{
+                background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
                 color: 'white',
-                background: `url(${World}) no-repeat center center`,
-                backgroundSize: 'cover',
+                minHeight: '200vh',
             }}>
-                <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
-                    Ready to Change the World?
-                </Typography>
-                <Typography variant="h5" sx={{ ...slideText }}>
-                    Vrooli is live! Let's change the world together!💙
-                </Typography>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
-                </Suspense>
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
+                <StarfieldAnimation
+                    numParticles={1000}
+                    lineWidth={2}
+                    depth={1000}
+                    style={{ position: 'absolute', width: '100%', height: '100%' }}
+                />
+                <Stack direction="column">
+                    <SlideContent>
+                        <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
+                        <Typography variant="h5" sx={{ ...slideText }}>
+                            Connect routines like building blocks to create more complex routines, which can themselves
+                            be used to create even more complex routines
+                        </Typography>
+                        <Typography variant="h5" sx={{ ...slideText }}>
+                            Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
+                        </Typography>
+                        <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
+                            <Button
+                                size="large"
+                                color="secondary"
+                                href={`${APP_URL}${APP_LINKS.Start}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`);
+                                }}
+                            >Get Started</Button>
+                        </Stack>
+                    </SlideContent>
+                    <SlideContent>
+                        <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
+                            Ready to Change the World?
+                        </Typography>
+                        <Typography variant="h5" sx={{ ...slideText }}>
+                            Vrooli is live! Let's change the world together!💙
+                        </Typography>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
+                        </Suspense>
+                        <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+                            <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
+                            <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
+                        </Stack>
+                    </SlideContent>
                 </Stack>
-            </Slide>
+            </SlideContainer>
         </Box>
     );
 }
