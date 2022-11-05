@@ -12,11 +12,7 @@ export const SlideContainer = ({
             key={id}
             sx={{
                 position: 'relative',
-                display: 'flex',
                 overflow: 'hidden',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '100vh',
                 ...sx
             }}
         >

@@ -6,7 +6,7 @@ import { slideImageContainer, slideText, slideTitle, translucentContainer, textP
 import { useLocation } from '@shared/route';
 import { Slide, SlideContainer, SlideContent } from 'components';
 import { APP_LINKS, APP_URL, WHITE_PAPER_URL } from '@shared/consts';
-import StarfieldAnimation from 'react-starfield-animation';
+import StarField from 'react-starfield-animation';
 
 export const FeaturesPage = () => {
     const [, setLocation] = useLocation();
@@ -58,10 +58,10 @@ export const FeaturesPage = () => {
                 </Stack>
             </Slide>
             <SlideContainer hasPrevious={true} hasNext={false} id='roadmap' sx={{ background: blackRadial }}>
-                <StarfieldAnimation
+                <StarField
                     numParticles={200}
                     lineWidth={2}
-                    depth={1000}
+                    depth={5000}
                     style={{ position: 'absolute', width: '100%', height: '100%' }}
                 />
                 <SlideContent>

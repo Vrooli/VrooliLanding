@@ -13,6 +13,9 @@ export const SlideContent = ({
             zIndex={1}
             sx={{
                 maxWidth: { xs: '100vw', sm: '90vw', md: 'min(80vw, 1000px)' },
+                minHeight: '100vh',
+                justifyContent: 'center',
+                margin: 'auto',
             }}
         >
             {children}

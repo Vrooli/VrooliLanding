@@ -3,13 +3,12 @@ import { Box, Button, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/
 import BlankRoutine from 'assets/img/blank-routine-1.png';
 import MonkeyCoin from 'assets/img/monkey-coin-page.png';
 import Community from 'assets/img/community.svg';
-import World from 'assets/img/world.png';
 import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
 import { blackRadial, slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { Suspense, useEffect, useState } from 'react';
-import StarfieldAnimation from 'react-starfield-animation';
+import StarField from 'react-starfield-animation'
 import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
@@ -17,6 +16,7 @@ import { APP_LINKS, APP_URL, LANDING_LINKS, SOCIALS, WHITE_PAPER_URL } from '@sh
 import { SlideContainer, SlideContent } from 'components';
 import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
 import { ArticleIcon, DiscordIcon, GitHubIcon, TwitterIcon } from '@shared/icons';
+import Earth from '../../../assets/img/Earth.svg';
 
 const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
 
@@ -81,6 +81,23 @@ export const HomePage = () => {
         window.addEventListener('resize', onResize);
         return () => {
             window.removeEventListener('resize', onResize);
+        }
+    })
+
+    // Track if earth is in view
+    const [earthInView, setEarthInView] = useState(false);
+    useEffect(() => {
+        const onScroll = () => {
+            const earth = document.getElementById('earth');
+            if (earth) {
+                const rect = earth.getBoundingClientRect();
+                const inView = rect.top < window.innerHeight + 500;
+                setEarthInView(inView);
+            }
+        }
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
         }
     })
 
@@ -229,11 +246,32 @@ export const HomePage = () => {
                 color: 'white',
                 minHeight: '200vh',
             }}>
-                <StarfieldAnimation
-                    numParticles={1000}
+                <StarField
+                    numParticles={400}
                     lineWidth={2}
-                    depth={1000}
+                    depth={5000}
                     style={{ position: 'absolute', width: '100%', height: '100%' }}
+                />
+                {/* Earth at bottom of slide */}
+                <Box
+                    id="earth"
+                    component="img"
+                    src={Earth}
+                    alt="Earth illustration"
+                    sx={{
+                        width: '150%',
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '-25%',
+                        right: '-25%',
+                        margin: 'auto',
+                        maxWidth: '1000px',
+                        maxHeight: '1000px',
+                        // As Earth comes into view, should translateY and scale up
+                        transform: earthInView ? 'translateY(69%) scale(1)' : 'translateY(90%) scale(0.8)',
+                        transition: 'transform 2.5s ease-in-out',
+
+                    }}
                 />
                 <Stack direction="column">
                     <SlideContent>
