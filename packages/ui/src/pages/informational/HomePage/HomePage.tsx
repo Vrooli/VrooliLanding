@@ -17,6 +17,7 @@ import { SlideContainer, SlideContent } from 'components';
 import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
 import { ArticleIcon, DiscordIcon, GitHubIcon, TwitterIcon } from '@shared/icons';
 import Earth from '../../../assets/img/Earth.svg';
+import { TwinkleStars } from 'components/TwinkleStars/TwinkleStars';
 
 const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
 
@@ -92,6 +93,7 @@ export const HomePage = () => {
             if (earth) {
                 const rect = earth.getBoundingClientRect();
                 const inView = rect.top < window.innerHeight + 500;
+                console.log('checking earth scroll', inView, rect.top, window.innerHeight)
                 setEarthInView(inView);
             }
         }
@@ -103,7 +105,7 @@ export const HomePage = () => {
 
     return (
         <Box>
-            <SlideContainerNeon id="an-open-source-economy">
+            <SlideContainerNeon id="an-open-source-economy" sx={{ zIndex: 3 }}>
                 <SlideContent>
                     <Typography component="h1" sx={{
                         ...slideTitle,
@@ -141,7 +143,7 @@ export const HomePage = () => {
                         transition: 'all 0.2s ease',
                     }}>Get Started</Button>
                     {/* Icon buttons for White paper, GitHub, Twitter, and Discord */}
-                    <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center" sx={{ paddingTop: 8 }}>
+                    <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center" sx={{ paddingTop: 8, zIndex: 3 }}>
                         <Tooltip title="Read the white Paper" placement="bottom">
                             <IconButton onClick={() => openLink(setLocation, WHITE_PAPER_URL)} sx={iconButtonProps}>
                                 <ArticleIcon fill='#0fa' />
@@ -165,11 +167,10 @@ export const HomePage = () => {
                     </Stack>
                 </SlideContent>
             </SlideContainerNeon>
-            <Slide hasPrevious={true} hasNext={true} id="routine-explanation" sx={{ background: blackRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id="routine-explanation" sx={{ background: blackRadial, zIndex: 3 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>How it Works</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
-                    A visual work routine is an intuitive process for completing a specific task —
-                    similar to a flowchart
+                    Traditional automation tools are not composable - when you create a routine, you can't reuse it in other routines.
                 </Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} margin="auto">
@@ -191,7 +192,7 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-            <Slide hasPrevious={true} hasNext={true} id="auto-generated-interfaces" sx={{ background: blackRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id="auto-generated-interfaces" sx={{ background: blackRadial, zIndex: 3 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
                     Say Goodbye to Endless Browser Tabs
                     <RotatedBox>👋</RotatedBox>
@@ -218,7 +219,7 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-            <Slide hasPrevious={true} hasNext={true} id="fund-your-idea" sx={{ color: 'white', background: blackRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id="fund-your-idea" sx={{ color: 'white', background: blackRadial, zIndex: 3 }}>
                 <Typography variant="h2" sx={{ ...slideTitle }}>
                     Collaborate, or Fly Solo
                 </Typography>
@@ -245,14 +246,14 @@ export const HomePage = () => {
                 background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
                 color: 'white',
                 minHeight: '200vh',
+                zIndex: 1,
             }}>
-                <StarField
-                    numParticles={400}
-                    lineWidth={2}
-                    depth={5000}
-                    style={{ position: 'absolute', width: '100%', height: '100%' }}
+                <TwinkleStars
+                    amount={400}
                 />
                 {/* Earth at bottom of slide */}
+                {/* TODO Earth should scroll up from bottom when sky is the limit slide is scrolled to,
+                then scale down so you can see the whole earth when ready to change the world is scrolled to  */}
                 <Box
                     id="earth"
                     component="img"
@@ -270,11 +271,11 @@ export const HomePage = () => {
                         // As Earth comes into view, should translateY and scale up
                         transform: earthInView ? 'translateY(69%) scale(1)' : 'translateY(90%) scale(0.8)',
                         transition: 'transform 2.5s ease-in-out',
-
+                        zIndex: 3,
                     }}
                 />
-                <Stack direction="column">
-                    <SlideContent>
+                <Stack direction="column" sx={{ zIndex: 4 }}>
+                    <SlideContent sx={{ zIndex: 4 }}>
                         <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
                         <Typography variant="h5" sx={{ ...slideText }}>
                             Connect routines like building blocks to create more complex routines, which can themselves
@@ -295,7 +296,7 @@ export const HomePage = () => {
                             >Get Started</Button>
                         </Stack>
                     </SlideContent>
-                    <SlideContent>
+                    <SlideContent sx={{ zIndex: 4 }}>
                         <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
                             Ready to Change the World?
                         </Typography>

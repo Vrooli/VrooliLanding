@@ -3,6 +3,7 @@ import { SlideContentProps } from '../types';
 
 export const SlideContent = ({
     children,
+    sx,
 }: SlideContentProps) => {
     return (
         <Stack
@@ -16,6 +17,7 @@ export const SlideContent = ({
                 minHeight: '100vh',
                 justifyContent: 'center',
                 margin: 'auto',
+                ...(sx || {}),
             }}
         >
             {children}

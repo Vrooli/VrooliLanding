@@ -5,4 +5,5 @@ export * from './navigation';
 export * from './PopupMenu/PopupMenu';
 export * from './ScrollToTop/ScrollToTop';
 export * from './slides';
+export * from './TwinkleStars/TwinkleStars';
 export * from './YoutubeEmbed/YoutubeEmbed';
