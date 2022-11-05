@@ -3,10 +3,12 @@ import { SlideContentProps } from '../types';
 
 export const SlideContent = ({
     children,
+    id,
     sx,
 }: SlideContentProps) => {
     return (
         <Stack
+            id={id}
             direction="column"
             spacing={2}
             p={2}

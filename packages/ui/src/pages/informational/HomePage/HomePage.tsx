@@ -8,7 +8,6 @@ import { useLocation } from '@shared/route';
 import { blackRadial, slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { Suspense, useEffect, useState } from 'react';
-import StarField from 'react-starfield-animation'
 import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
@@ -86,15 +85,24 @@ export const HomePage = () => {
     })
 
     // Track if earth is in view
-    const [earthInView, setEarthInView] = useState(false);
+    const [earthTransform, setEarthTransform] = useState<string>('translateY(90%) scale(0.8)');
     useEffect(() => {
         const onScroll = () => {
-            const earth = document.getElementById('earth');
-            if (earth) {
-                const rect = earth.getBoundingClientRect();
-                const inView = rect.top < window.innerHeight + 500;
-                console.log('checking earth scroll', inView, rect.top, window.innerHeight)
-                setEarthInView(inView);
+            const inView = (element: HTMLElement | null) => {
+                if (!element) return false;
+                const rect = element.getBoundingClientRect();
+                const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+                console.log('rect.top', rect.top, 'rect.bottom', rect.bottom, 'windowHeight', windowHeight);
+                return rect.top < windowHeight / 2;
+            }
+            const earthHorizonSlide = document.getElementById('earth-horizon-slide');
+            const earthFullSlide = document.getElementById('earth-full-slide');
+            if (inView(earthFullSlide)) {
+                setEarthTransform('translateY(25%) scale(0.5)');
+            } else if (inView(earthHorizonSlide)) {
+                setEarthTransform('translateY(69%) scale(1)');
+            } else {
+                setEarthTransform('translateY(90%) scale(0.8)');
             }
         }
         window.addEventListener('scroll', onScroll);
@@ -261,21 +269,20 @@ export const HomePage = () => {
                     alt="Earth illustration"
                     sx={{
                         width: '150%',
-                        position: 'absolute',
+                        position: 'fixed',
                         bottom: '0',
                         left: '-25%',
                         right: '-25%',
                         margin: 'auto',
                         maxWidth: '1000px',
                         maxHeight: '1000px',
-                        // As Earth comes into view, should translateY and scale up
-                        transform: earthInView ? 'translateY(69%) scale(1)' : 'translateY(90%) scale(0.8)',
-                        transition: 'transform 2.5s ease-in-out',
+                        transform: earthTransform,
+                        transition: 'transform 2s ease-in-out',
                         zIndex: 3,
                     }}
                 />
                 <Stack direction="column" sx={{ zIndex: 4 }}>
-                    <SlideContent sx={{ zIndex: 4 }}>
+                    <SlideContent id="earth-horizon-slide" sx={{ zIndex: 4 }}>
                         <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
                         <Typography variant="h5" sx={{ ...slideText }}>
                             Connect routines like building blocks to create more complex routines, which can themselves
@@ -296,7 +303,7 @@ export const HomePage = () => {
                             >Get Started</Button>
                         </Stack>
                     </SlideContent>
-                    <SlideContent sx={{ zIndex: 4 }}>
+                    <SlideContent id="earth-full-slide" sx={{ zIndex: 4 }}>
                         <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
                             Ready to Change the World?
                         </Typography>

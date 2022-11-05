@@ -4,9 +4,8 @@ import Target from 'assets/img/target.webp';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { slideImageContainer, slideText, slideTitle, translucentContainer, textPop, blackRadial, blueRadial } from 'styles';
 import { useLocation } from '@shared/route';
-import { Slide, SlideContainer, SlideContent } from 'components';
+import { Slide, SlideContainer, SlideContent, TwinkleStars } from 'components';
 import { APP_LINKS, APP_URL, WHITE_PAPER_URL } from '@shared/consts';
-import StarField from 'react-starfield-animation';
 
 export const FeaturesPage = () => {
     const [, setLocation] = useLocation();
@@ -58,11 +57,8 @@ export const FeaturesPage = () => {
                 </Stack>
             </Slide>
             <SlideContainer hasPrevious={true} hasNext={false} id='roadmap' sx={{ background: blackRadial }}>
-                <StarField
-                    numParticles={200}
-                    lineWidth={2}
-                    depth={5000}
-                    style={{ position: 'absolute', width: '100%', height: '100%' }}
+                <TwinkleStars
+                    amount={400}
                 />
                 <SlideContent>
                     <Typography variant='h2' mb={4} sx={{ ...slideTitle, fontFamily: 'Neuropol' }}>Roadmap</Typography>

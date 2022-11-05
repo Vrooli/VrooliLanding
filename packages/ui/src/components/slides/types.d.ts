@@ -22,5 +22,6 @@ export interface SlideContainerNeonProps {
 
 export interface SlideContentProps {
     children: React.ReactNode;
+    id?: string;
     sx?: object;
 }
