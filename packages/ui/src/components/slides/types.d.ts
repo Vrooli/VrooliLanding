@@ -25,3 +25,9 @@ export interface SlideContentProps {
     id?: string;
     sx?: object;
 }
+
+export interface SlidePageProps {
+    children: React.ReactNode;
+    id?: string;
+    sx?: object;
+}

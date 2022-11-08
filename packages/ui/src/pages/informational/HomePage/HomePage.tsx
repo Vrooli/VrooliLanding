@@ -12,7 +12,7 @@ import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import { lazily } from 'react-lazily';
 import { APP_LINKS, APP_URL, LANDING_LINKS, SOCIALS, WHITE_PAPER_URL } from '@shared/consts';
-import { SlideContainer, SlideContent } from 'components';
+import { SlideContent, SlidePage } from 'components';
 import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
 import { ArticleIcon, DiscordIcon, GitHubIcon, TwitterIcon } from '@shared/icons';
 import Earth from '../../../assets/img/Earth.svg';
@@ -92,11 +92,11 @@ export const HomePage = () => {
                 if (!element) return false;
                 const rect = element.getBoundingClientRect();
                 const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-                console.log('rect.top', rect.top, 'rect.bottom', rect.bottom, 'windowHeight', windowHeight);
+                console.log(rect.top, rect.bottom, windowHeight);
                 return rect.top < windowHeight / 2;
             }
-            const earthHorizonSlide = document.getElementById('earth-horizon-slide');
-            const earthFullSlide = document.getElementById('earth-full-slide');
+            const earthHorizonSlide = document.getElementById('sky-is-limit');
+            const earthFullSlide = document.getElementById('get-started');
             if (inView(earthFullSlide)) {
                 setEarthTransform('translateY(25%) scale(0.5)');
             } else if (inView(earthHorizonSlide)) {
@@ -105,14 +105,53 @@ export const HomePage = () => {
                 setEarthTransform('translateY(90%) scale(0.8)');
             }
         }
-        window.addEventListener('scroll', onScroll);
+        // Add scroll listener to component with 'page' id
+        const page = document.getElementById('page');
+        if (page) {
+            page.addEventListener('scroll', onScroll);
+        }
         return () => {
-            window.removeEventListener('scroll', onScroll);
+            if (page) {
+                page.removeEventListener('scroll', onScroll);
+            }
         }
     })
 
     return (
-        <Box>
+        <SlidePage id='page' sx={{ background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)' }}>
+            {/* Background stars */}
+            <TwinkleStars
+                amount={400}
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 0,
+                }}
+            />
+            {/* Earth at bottom of page */}
+            {/* Earth changes position depending on the slide  */}
+            <Box
+                id="earth"
+                component="img"
+                src={Earth}
+                alt="Earth illustration"
+                sx={{
+                    width: '150%',
+                    position: 'fixed',
+                    bottom: '0',
+                    left: '-25%',
+                    right: '-25%',
+                    margin: 'auto',
+                    maxWidth: '1000px',
+                    maxHeight: '1000px',
+                    transform: earthTransform,
+                    transition: 'transform 1.5s ease-in-out',
+                    zIndex: 3,
+                }}
+            />
             <SlideContainerNeon id="an-open-source-economy" sx={{ zIndex: 3 }}>
                 <SlideContent>
                     <Typography component="h1" sx={{
@@ -249,77 +288,42 @@ export const HomePage = () => {
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                 </Stack>
             </Slide>
-            {/* Double slide */}
-            <SlideContainer hasPrevious={true} hasNext={false} id="sky-is-limit" sx={{
-                background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
-                color: 'white',
-                minHeight: '200vh',
-                zIndex: 1,
-            }}>
-                <TwinkleStars
-                    amount={400}
-                />
-                {/* Earth at bottom of slide */}
-                {/* TODO Earth should scroll up from bottom when sky is the limit slide is scrolled to,
-                then scale down so you can see the whole earth when ready to change the world is scrolled to  */}
-                <Box
-                    id="earth"
-                    component="img"
-                    src={Earth}
-                    alt="Earth illustration"
-                    sx={{
-                        width: '150%',
-                        position: 'fixed',
-                        bottom: '0',
-                        left: '-25%',
-                        right: '-25%',
-                        margin: 'auto',
-                        maxWidth: '1000px',
-                        maxHeight: '1000px',
-                        transform: earthTransform,
-                        transition: 'transform 2s ease-in-out',
-                        zIndex: 3,
-                    }}
-                />
-                <Stack direction="column" sx={{ zIndex: 4 }}>
-                    <SlideContent id="earth-horizon-slide" sx={{ zIndex: 4 }}>
-                        <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
-                        <Typography variant="h5" sx={{ ...slideText }}>
-                            Connect routines like building blocks to create more complex routines, which can themselves
-                            be used to create even more complex routines
-                        </Typography>
-                        <Typography variant="h5" sx={{ ...slideText }}>
-                            Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
-                        </Typography>
-                        <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
-                            <Button
-                                size="large"
-                                color="secondary"
-                                href={`${APP_URL}${APP_LINKS.Start}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`);
-                                }}
-                            >Get Started</Button>
-                        </Stack>
-                    </SlideContent>
-                    <SlideContent id="earth-full-slide" sx={{ zIndex: 4 }}>
-                        <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
-                            Ready to Change the World?
-                        </Typography>
-                        <Typography variant="h5" sx={{ ...slideText }}>
-                            Vrooli is live! Let's change the world together!💙
-                        </Typography>
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
-                        </Suspense>
-                        <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                            <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
-                            <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
-                        </Stack>
-                    </SlideContent>
+            <Slide hasPrevious={true} hasNext={true} id="sky-is-limit" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
+                <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
+                <Typography variant="h5" sx={{ ...slideText }}>
+                    Connect routines like building blocks to create more complex routines, which can themselves
+                    be used to create even more complex routines
+                </Typography>
+                <Typography variant="h5" sx={{ ...slideText }}>
+                    Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
+                </Typography>
+                <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
+                    <Button
+                        size="large"
+                        color="secondary"
+                        href={`${APP_URL}${APP_LINKS.Start}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`);
+                        }}
+                    >Get Started</Button>
                 </Stack>
-            </SlideContainer>
-        </Box>
+            </Slide>
+            <Slide hasPrevious={true} hasNext={false} id="get-started" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
+                <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
+                    Ready to Change the World?
+                </Typography>
+                <Typography variant="h5" sx={{ ...slideText }}>
+                    Vrooli is live! Let's change the world together!💙
+                </Typography>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
+                </Suspense>
+                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
+                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
+                </Stack>
+            </Slide>
+        </SlidePage>
     );
 }

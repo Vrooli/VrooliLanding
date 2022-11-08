@@ -6,13 +6,18 @@ import { slideImageContainer, slideText, slideTitle, translucentContainer, textP
 import { useLocation } from '@shared/route';
 import { Slide, SlideContainer, SlideContent, TwinkleStars } from 'components';
 import { APP_LINKS, APP_URL, WHITE_PAPER_URL } from '@shared/consts';
+import Earth from '../../../assets/img/Earth.svg';
 
 export const FeaturesPage = () => {
     const [, setLocation] = useLocation();
 
     return (
-        <Box id="page">
-            <Slide hasPrevious={false} hasNext={true} id="the-problem" sx={{ color: 'white', background: blackRadial }}>
+        <Box id="page" sx={{
+            perspective: '1px',
+            transformStyle: 'preserve-3d',
+            overflow: 'hidden',
+        }}>
+            <Slide hasPrevious={false} hasNext={true} id="the-problem" sx={{ color: 'white', background: blackRadial, zIndex: 3 }}>
                 <Typography variant='h2' component="h1" pb={4} sx={{ ...slideTitle, paddingTop: { xs: 16, sm: 0 } }}>Available Now</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Project Catalyst will empower the masses with governance, but this system is not perfect...
@@ -37,7 +42,7 @@ export const FeaturesPage = () => {
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, 'https://matthalloran8.medium.com/the-next-generation-of-global-collaboration-a4839766e29e#4f79')}>What's Project Catalyst</Button>
                 </Stack>
             </Slide>
-            <Slide hasPrevious={true} hasNext={true} id='our-mission' sx={{ background: blueRadial }}>
+            <Slide hasPrevious={true} hasNext={true} id='our-mission' sx={{ background: blueRadial, zIndex: 3 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>Coming Soon</Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
@@ -56,12 +61,41 @@ export const FeaturesPage = () => {
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, WHITE_PAPER_URL)}>White Paper</Button>
                 </Stack>
             </Slide>
-            <SlideContainer hasPrevious={true} hasNext={false} id='roadmap' sx={{ background: blackRadial }}>
+            <SlideContainer hasPrevious={true} hasNext={false} id='roadmap' sx={{ 
+                background: blackRadial, 
+                zIndex: 1, 
+                transformStyle: 'inherit',
+                transform: 'translateZ(-1px) scale(2)',
+                }}>
                 <TwinkleStars
                     amount={400}
+                    sx={{
+                        transform: 'translateZ(-1px) scale(2)',
+                    }}
                 />
-                <SlideContent>
-                    <Typography variant='h2' mb={4} sx={{ ...slideTitle, fontFamily: 'Neuropol' }}>Roadmap</Typography>
+                <Box
+                    id="earth"
+                    component="img"
+                    src={Earth}
+                    alt="Earth illustration"
+                    sx={{
+                        width: '150%',
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '-25%',
+                        right: '-25%',
+                        margin: 'auto',
+                        maxWidth: '1000px',
+                        maxHeight: '1000px',
+                        transform: 'translate3d(0, 69%, -0.5px) scale(1.5)',
+                        zIndex: 3,
+                    }}
+                />
+                <SlideContent sx={{ 
+                    zIndex: 4,
+                    transform: 'translateZ(0) scale(1)',
+                    }}>
+                    <Typography variant='h2' mb={4} sx={{ ...slideTitle, fontFamily: 'Neuropol' }}>Roadmap 🚀</Typography>
                     <Stack direction="column" spacing={10}>
                         <Box sx={{ ...translucentContainer }}>
                             <Typography variant='h5' mb={1} sx={{ ...textPop }}>March 2022</Typography>

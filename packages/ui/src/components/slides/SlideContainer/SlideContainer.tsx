@@ -13,6 +13,7 @@ export const SlideContainer = ({
             sx={{
                 position: 'relative',
                 overflow: 'hidden',
+                scrollSnapAlign: 'start',
                 ...sx
             }}
         >

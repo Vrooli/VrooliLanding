@@ -8,15 +8,12 @@ import { themes } from 'utils';
 import { Routes } from 'Routes';
 import { Box, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import SakBunderan from './assets/font/SakBunderan-base64.txt';
-import Neuropol from './assets/font/Neuropol-min.woff';
 
 const useStyles = makeStyles(() => ({
     "@global": {
         body: {
             backgroundColor: 'black',
-            overflowX: 'hidden',
-            overflowY: 'auto',
+            overflow: 'hidden',
         },
         '#page': {
             minWidth: '100%',
