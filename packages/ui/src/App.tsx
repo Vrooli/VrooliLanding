@@ -47,7 +47,25 @@ const useStyles = makeStyles(() => ({
         '.tsparticles-canvas': {
             position: 'absolute',
             overflow: 'hidden',
-        }
+        },
+        // Fade in animation for slide content
+        '.hidden': {
+            opacity: 0,
+            transition: 'all 1s ease-in-out',
+            filter: 'blur(10px)',
+            transform: 'translateX(-100%)',
+        },
+        '.show': {
+            opacity: 1,
+            transition: 'all 1s ease-in-out',
+            filter: 'blur(0px)',
+            transform: 'translateX(0%)',
+        },
+        '@media(prefers-reduced-motion)': {
+            '.hidden': {
+                transition: 'none',
+            }
+        },
     },
 }));
 

@@ -10,7 +10,7 @@ export const AboutUsPage = () => {
     const [, setLocation] = useLocation();
     return (
         <Box id="page">
-            <Slide hasPrevious={false} hasNext={false} id="about-the-team" sx={{ background: "fixed radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)" }}>
+            <Slide id="about-the-team" sx={{ background: "fixed radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)" }}>
                 <Typography variant='h2' component="h1" pb={4} sx={{...slideTitle}}>About the Team</Typography>
                 <Typography variant="h4" margin='auto' textAlign="left" sx={{
                     fontSize: { xs: '1.5rem', sm: '1.75rem' },

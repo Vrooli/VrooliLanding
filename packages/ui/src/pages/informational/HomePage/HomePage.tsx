@@ -2,10 +2,9 @@ import { Slide } from 'components/slides/Slide/Slide';
 import { Box, Button, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import BlankRoutine from 'assets/img/blank-routine-1.png';
 import MonkeyCoin from 'assets/img/monkey-coin-page.png';
-import Community from 'assets/img/community.svg';
 import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
-import { blackRadial, slideImageContainer, slideText, slideTitle, textPop } from 'styles';
+import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { Suspense, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -214,7 +213,7 @@ export const HomePage = () => {
                     </Stack>
                 </SlideContent>
             </SlideContainerNeon>
-            <Slide hasPrevious={true} hasNext={true} id="routine-explanation" sx={{ background: blackRadial, zIndex: 3 }}>
+            <Slide id="routine-explanation" sx={{ background: 'transparent', zIndex: 3 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>How it Works</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Traditional automation tools are not composable - when you create a routine, you can't reuse it in other routines.
@@ -239,7 +238,7 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-            <Slide hasPrevious={true} hasNext={true} id="auto-generated-interfaces" sx={{ background: blackRadial, zIndex: 3 }}>
+            <Slide id="auto-generated-interfaces" sx={{ background: 'transparent', zIndex: 3 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
                     Say Goodbye to Endless Browser Tabs
                     <RotatedBox>👋</RotatedBox>
@@ -266,29 +265,27 @@ export const HomePage = () => {
                     </Grid>
                 </Grid>
             </Slide>
-            <Slide hasPrevious={true} hasNext={true} id="fund-your-idea" sx={{ color: 'white', background: blackRadial, zIndex: 3 }}>
+            <Slide id="fund-your-idea" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
                 <Typography variant="h2" sx={{ ...slideTitle }}>
                     Collaborate, or Fly Solo
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} margin="auto">
-                        <ul className='slideList'>
-                            <li>Step-by-step guidance to create your own business</li>
-                            <li>Vote and build on project prototypes</li>
-                            <li>Discover projects and organizations that need your help</li>
-                        </ul>
+                    <Grid item xs={12} margin="auto">
+                        <Typography variant="h5" sx={{ ...slideText }}>
+                            Routines support roles, permissions, and voting - which makes them perfect for replacing business processes.
+                        </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
-                        <Box sx={{ ...slideImageContainer }}>
-                            <img alt="Community illustration - by Vecteezy" src={Community} />
-                        </Box>
+                    <Grid item xs={12} margin="auto">
+                        <Typography variant="h5" sx={{ ...slideText }}>
+                            Hate networking? No problem. Everything you can accomplish in an organization can be done solo.
+                        </Typography>
                     </Grid>
                 </Grid>
                 <Stack direction="row" justifyContent="center" alignItems="center">
                     <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
                 </Stack>
             </Slide>
-            <Slide hasPrevious={true} hasNext={true} id="sky-is-limit" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
+            <Slide id="sky-is-limit" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
                     Connect routines like building blocks to create more complex routines, which can themselves
@@ -309,7 +306,7 @@ export const HomePage = () => {
                     >Get Started</Button>
                 </Stack>
             </Slide>
-            <Slide hasPrevious={true} hasNext={false} id="get-started" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
+            <Slide id="get-started" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
                 <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
                     Ready to Change the World?
                 </Typography>

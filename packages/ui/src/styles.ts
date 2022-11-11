@@ -35,15 +35,6 @@ export const slideImageContainer: SxProps = {
     }
 } as CSSProperties;
 
-export const translucentContainer: SxProps = {
-    boxShadow: '0px 0px 6px #040505',
-    backgroundColor: 'rgba(255,255,255,0.3)',
-    backdropFilter: 'blur(24px)',
-    borderRadius: '0.5rem',
-    textAlign: 'center',
-    padding: 1.5,
-} as CSSProperties;
-
 /**
  * Disables text highlighting
  */

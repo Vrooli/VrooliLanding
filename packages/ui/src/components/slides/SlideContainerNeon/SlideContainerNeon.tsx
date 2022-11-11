@@ -57,8 +57,6 @@ export const SlideContainerNeon = ({
 
     return (
         <SlideContainer
-            hasPrevious={false}
-            hasNext={true}
             id={id}
             key={id}
             sx={{
