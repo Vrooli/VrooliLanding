@@ -16,11 +16,13 @@ export const textPop: SxProps = {
 export const slideTitle: SxProps = {
     textAlign: 'center',
     fontSize: { xs: '2.4em', sm: '3rem', md: '3.75rem' },
+    zIndex: 10,
 };
 
 export const slideText: SxProps = {
     margin: 'auto',
-    textAlign: { xs: 'left', md: 'justify' }, fontSize: { xs: '1.25rem', md: '1.5rem' }
+    textAlign: { xs: 'left', md: 'justify' }, fontSize: { xs: '1.25rem', md: '1.5rem' },
+    zIndex: 10,
 };
 
 export const slideImageContainer: SxProps = {

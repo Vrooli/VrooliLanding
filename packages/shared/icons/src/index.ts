@@ -32,6 +32,7 @@ export * from './LinkIcon';
 export * from './LogInIcon';
 export * from './LogOutIcon';
 export * from './OrganizationIcon';
+export * from './PlayIcon';
 export * from './ProjectIcon';
 export * from './ProposalIcon';
 export * from './RedirectIcon';

@@ -13,6 +13,7 @@ export interface SlideContainerProps {
 export interface SlideContainerNeonProps {
     id: string;
     children: React.ReactNode;
+    show?: boolean;
     sx?: object;
 }
 

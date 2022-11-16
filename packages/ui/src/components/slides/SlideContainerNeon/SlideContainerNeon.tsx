@@ -52,6 +52,7 @@ const blob2Animation = keyframes`
 export const SlideContainerNeon = ({
     id,
     children,
+    show,
     sx,
 }: SlideContainerNeonProps) => {
 
@@ -62,13 +63,23 @@ export const SlideContainerNeon = ({
             sx={{
                 // Set background and color
                 background: blackRadial,
+                backgroundAttachment: 'fixed',
                 color: 'white',
                 scrollSnapAlign: 'start',
                 ...sx
             }}
         >
             {/* Constellation */}
-            <Box sx={{ position: 'absolute', width: '100%', height: '100%', opacity: 0.5 }} >
+            <Box sx={{
+                position: 'fixed',
+                pointerEvents: 'none',
+                width: '100%',
+                height: '100%',
+                opacity: show === false ? 0 : 0.5,
+                transition: 'opacity 1s ease-in-out',
+                zIndex: 1,
+            }}
+            >
                 {/* @ts-ignore TODO */}
                 <Particles
                     id="tsparticles"
@@ -150,11 +161,15 @@ export const SlideContainerNeon = ({
             </Box>
             {/* Blob 1 */}
             <Box sx={{
-                position: 'absolute',
+                position: 'fixed',
+                pointerEvents: 'none',
                 bottom: -300,
                 left: -300,
                 width: '100%',
                 height: '100%',
+                zIndex: 2,
+                opacity: show === false ? 0 : 0.5,
+                transition: 'opacity 1s ease-in-out',
             }}>
                 <Box
                     component="img"
@@ -169,11 +184,15 @@ export const SlideContainerNeon = ({
             </Box>
             {/* Blob 2 */}
             <Box sx={{
-                position: 'absolute',
+                position: 'fixed',
+                pointerEvents: 'none',
                 top: -250,
                 right: -350,
                 width: '100%',
                 height: '100%',
+                zIndex: 2,
+                opacity: show === false ? 0 : 0.5,
+                transition: 'opacity 1s ease-in-out',
             }}>
                 <Box
                     component="img"

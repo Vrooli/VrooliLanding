@@ -4,21 +4,11 @@ import Target from 'assets/img/target.webp';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { useLocation } from '@shared/route';
-import { Slide, SlideContainer, SlideContent, SlidePage } from 'components';
+import { GlossyContainer, PulseButton, Slide, SlideContainer, SlideContent } from 'components';
 import { APP_LINKS, APP_URL, WHITE_PAPER_URL } from '@shared/consts';
 import { useEffect, useMemo } from 'react';
 import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
-
-const slideStyle = {
-    boxShadow: '0px 0px 6px #040505',
-    backgroundColor: 'rgba(255,255,255,0.3)',
-    backdropFilter: 'blur(24px)',
-    borderRadius: '0.5rem',
-    textAlign: 'center',
-    padding: 1.5,
-    opacity: 0, // Updated by animation
-    minHeight: '500px',
-}
+import { ArticleIcon, PlayIcon } from '@shared/icons';
 
 export const FeaturesPage = () => {
     const [, setLocation] = useLocation();
@@ -110,14 +100,14 @@ export const FeaturesPage = () => {
                     }}>
                         <Typography variant='h2' mb={4} sx={{ ...slideTitle, fontFamily: 'Neuropol' }}>Roadmap 🚀</Typography>
                         <Stack id="roadmap-stack" direction="column" spacing={10}>
-                            <Box className="hidden" sx={{ ...slideStyle }}>
+                            <GlossyContainer className="hidden" sx={{ opacity: 0 }}>
                                 <Typography variant='h4' mb={1} sx={{ ...textPop }}>March 2022</Typography>
                                 <ul className='roadmapList'>
                                     <li>Website launch🎉</li>
                                     <li>Create, run, star, and vote on routines</li>
                                 </ul>
-                            </Box>
-                            <Box className="hidden" sx={{ ...slideStyle }}>
+                            </GlossyContainer>
+                            <GlossyContainer className="hidden" sx={{ opacity: 0 }}>
                                 <Typography variant='h4' mb={1} sx={{ ...textPop }}>Q2 2022</Typography>
                                 <ul className='roadmapList'>
                                     <li>Improved routine visualizer</li>
@@ -126,8 +116,8 @@ export const FeaturesPage = () => {
                                     <li>Improved reporting system</li>
                                     <li>Improved dashboards</li>
                                 </ul>
-                            </Box>
-                            <Box className="hidden" sx={{ ...slideStyle }}>
+                            </GlossyContainer>
+                            <GlossyContainer className="hidden" sx={{ opacity: 0 }}>
                                 <Typography variant='h4' mb={1} sx={{ ...textPop }}>Q3 2022</Typography>
                                 <ul className='roadmapList'>
                                     <li>First formal API spec with data storage and automation</li>
@@ -135,15 +125,15 @@ export const FeaturesPage = () => {
                                     <li>Smart contract library</li>
                                     <li>Limited smart contract functionality in routines</li>
                                 </ul>
-                            </Box>
-                            <Box className="hidden" sx={{ ...slideStyle }}>
+                            </GlossyContainer>
+                            <GlossyContainer className="hidden" sx={{ opacity: 0 }}>
                                 <Typography variant='h4' mb={1} sx={{ ...textPop }}>Q4 2022</Typography>
                                 <ul className='roadmapList'>
                                     <li>Reputation system, powered by Atala PRISM (if ready)</li>
                                     <li>Connect any Cardano smart contract to a routine</li>
                                 </ul>
-                            </Box>
-                            <Box className="hidden" sx={{ ...slideStyle }}>
+                            </GlossyContainer>
+                            <GlossyContainer className="hidden" sx={{ opacity: 0 }}>
                                 <Typography variant='h4' mb={1} sx={{ ...textPop }}>2023 and Beyond</Typography>
                                 <ul className='roadmapList'>
                                     <li>UX improvements</li>
@@ -152,11 +142,21 @@ export const FeaturesPage = () => {
                                     <li>Offline support</li>
                                     <li>Decentralize all the things!</li>
                                 </ul>
-                            </Box>
+                            </GlossyContainer>
                         </Stack>
                         <Stack direction="row" justifyContent="center" alignItems="center" pt={5} pb={10} spacing={2}>
-                            <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
-                            <Button size="large" color="secondary" onClick={() => openLink(setLocation, WHITE_PAPER_URL)}>White Paper</Button>
+                            <PulseButton
+                                variant="outlined"
+                                color="secondary"
+                                onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}
+                                startIcon={<PlayIcon fill='#0fa' />}
+                            >Start</PulseButton>
+                            <PulseButton
+                                variant="outlined"
+                                color="secondary"
+                                onClick={() => openLink(setLocation, WHITE_PAPER_URL)}
+                                startIcon={<ArticleIcon fill='#0fa' />}
+                            >White Paper</PulseButton>
                         </Stack>
                     </SlideContent>
                 </SlideContainer>

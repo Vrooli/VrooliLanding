@@ -6,46 +6,15 @@ import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
 import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { keyframes } from '@mui/system';
-import { lazily } from 'react-lazily';
-import { APP_LINKS, APP_URL, LANDING_LINKS, SOCIALS, WHITE_PAPER_URL } from '@shared/consts';
-import { SlideContent, SlidePage } from 'components';
+import { APP_LINKS, APP_URL, SOCIALS, WHITE_PAPER_URL } from '@shared/consts';
+import { GlossyContainer, PulseButton, SlideContent, SlidePage } from 'components';
 import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
-import { ArticleIcon, DiscordIcon, GitHubIcon, TwitterIcon } from '@shared/icons';
+import { ArticleIcon, DiscordIcon, GitHubIcon, PlayIcon, TwitterIcon } from '@shared/icons';
 import Earth from '../../../assets/img/Earth.svg';
 import { TwinkleStars } from 'components/TwinkleStars/TwinkleStars';
-
-const { YoutubeEmbed } = lazily(() => import('../../../components/YoutubeEmbed/YoutubeEmbed'));
-
-// Hand wave animation
-const wave = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(30deg);
-  }
-  20% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-`;
-// Pulsing border animation
-const pulse = keyframes`
-    0% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(0, 255, 170, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(0, 255, 170, 0);
-    }
-`;
+import { wave } from 'animations';
 
 const RotatedBox = styled("div")({
     display: 'inline-block',
@@ -73,35 +42,28 @@ const iconButtonProps = {
 export const HomePage = () => {
     const [, setLocation] = useLocation();
 
-    // Calculate dimensions for youtubeembed
-    const [width, setWidth] = useState(window.innerWidth);
-    useEffect(() => {
-        const onResize = () => setWidth(window.innerWidth);
-        window.addEventListener('resize', onResize);
-        return () => {
-            window.removeEventListener('resize', onResize);
-        }
-    })
-
-    // Track if earth is in view
-    const [earthTransform, setEarthTransform] = useState<string>('translateY(90%) scale(0.8)');
+    // Track if earth/sky is in view
+    const [earthTransform, setEarthTransform] = useState<string>('translate(0%, 100%) scale(1)');
+    const [isSkyVisible, setIsSkyVisible] = useState<boolean>(false);
     useEffect(() => {
         const onScroll = () => {
             const inView = (element: HTMLElement | null) => {
                 if (!element) return false;
                 const rect = element.getBoundingClientRect();
                 const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-                console.log(rect.top, rect.bottom, windowHeight);
                 return rect.top < windowHeight / 2;
             }
             const earthHorizonSlide = document.getElementById('sky-is-limit');
             const earthFullSlide = document.getElementById('get-started');
             if (inView(earthFullSlide)) {
-                setEarthTransform('translateY(25%) scale(0.5)');
+                setEarthTransform('translate(25%, 25%) scale(0.8)');
+                setIsSkyVisible(true);
             } else if (inView(earthHorizonSlide)) {
-                setEarthTransform('translateY(69%) scale(1)');
+                setEarthTransform('translate(0%, 69%) scale(1)');
+                setIsSkyVisible(true);
             } else {
-                setEarthTransform('translateY(90%) scale(0.8)');
+                setEarthTransform('translate(0%, 100%) scale(1)');
+                setIsSkyVisible(false);
             }
         }
         // Add scroll listener to component with 'page' id
@@ -116,6 +78,24 @@ export const HomePage = () => {
         }
     })
 
+    // Intersection observer for fade in of slide content
+    // const observer = useMemo(() => new IntersectionObserver((entries) => {
+    //     entries.forEach(entry => {
+    //         if (entry.isIntersecting) {
+    //             entry.target.classList.add('show');
+    //         } else {
+    //             entry.target.classList.remove('show');
+    //         }
+    //     })
+    // }), []);
+    // useEffect(() => {
+    //     const roadmapSections = document.querySelectorAll('.hidden');
+    //     roadmapSections.forEach(section => {
+    //         observer.observe(section);
+    //     }
+    //     )
+    // }, [observer])
+
     return (
         <SlidePage id='page' sx={{ background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)' }}>
             {/* Background stars */}
@@ -123,11 +103,14 @@ export const HomePage = () => {
                 amount={400}
                 sx={{
                     position: 'absolute',
+                    pointerEvents: 'none',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    zIndex: 0,
+                    zIndex: 4,
+                    opacity: isSkyVisible ? 1 : 0,
+                    transition: 'opacity 1s ease-in-out',
                 }}
             />
             {/* Earth at bottom of page */}
@@ -148,10 +131,10 @@ export const HomePage = () => {
                     maxHeight: '1000px',
                     transform: earthTransform,
                     transition: 'transform 1.5s ease-in-out',
-                    zIndex: 3,
+                    zIndex: 5,
                 }}
             />
-            <SlideContainerNeon id="an-open-source-economy" sx={{ zIndex: 3 }}>
+            <SlideContainerNeon id="an-open-source-economy" show={!isSkyVisible} sx={{ zIndex: 3 }}>
                 <SlideContent>
                     <Typography component="h1" sx={{
                         ...slideTitle,
@@ -168,26 +151,16 @@ export const HomePage = () => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    {/* Start button */}
-                    <Button variant="outlined" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)} sx={{
-                        fontSize: '1.3rem',
-                        // Button border has neon green glow animation
-                        animation: `${pulse} 3s infinite ease`,
-                        borderColor: '#0fa',
-                        color: '#0fa',
-                        width: 'fit-content',
-                        marginLeft: 'auto !important',
-                        marginRight: 'auto !important',
-                        // On hover, brighten and grow
-                        '&:hover': {
-                            borderColor: '#0fa',
-                            color: '#0fa',
-                            background: 'transparent',
-                            filter: 'brightness(1.2)',
-                            transform: 'scale(1.05)',
-                        },
-                        transition: 'all 0.2s ease',
-                    }}>Get Started</Button>
+                    <PulseButton
+                        variant="outlined"
+                        color="secondary"
+                        onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}
+                        startIcon={<PlayIcon fill='#0fa' />}
+                        sx={{
+                            marginLeft: 'auto !important',
+                            marginRight: 'auto !important',
+                        }}
+                    >Start</PulseButton>
                     {/* Icon buttons for White paper, GitHub, Twitter, and Discord */}
                     <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center" sx={{ paddingTop: 8, zIndex: 3 }}>
                         <Tooltip title="Read the white Paper" placement="bottom">
@@ -212,87 +185,77 @@ export const HomePage = () => {
                         </Tooltip>
                     </Stack>
                 </SlideContent>
+                <SlideContent>
+                    <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>Three Easy Steps</Typography>
+                    <Stack direction="row" justifyContent="center" spacing={4}>
+                        <GlossyContainer>
+                            <Typography variant='h5' mb={2}><b>Personalization</b></Typography>
+                        </GlossyContainer>
+                        <GlossyContainer>
+                            <Typography variant='h5' mb={2}><b>Collaboration</b></Typography>
+                        </GlossyContainer>
+                        <GlossyContainer>
+                            <Typography variant='h5' mb={2}><b>Automation</b></Typography>
+                        </GlossyContainer>
+                    </Stack>
+                    <Typography variant="h5" sx={{ ...slideText }}>
+                        This combination creates a <Box sx={{ display: 'contents', color: 'gold' }}><b>self-improving productivity machine</b></Box>
+                    </Typography>
+                </SlideContent>
+                <SlideContent>
+                    <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
+                        Take Back Your Freedom
+                    </Typography>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6} margin="auto">
+                            <Stack direction="column" spacing={2}>
+                                <Typography variant="h5" sx={{ ...slideText }}>
+                                    Vrooli is designed to maximize personal growth, while minimizing the time and resources required to get things done.
+                                </Typography>
+                                <Typography variant="h5" sx={{ ...slideText }}>
+                                    It will guide you through organizing your life, learning new skills, and monetizing your talents.
+                                </Typography>
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
+                            <Box sx={{ ...slideImageContainer }}>
+                                <img alt="Routine runner interface example - Minting tokens" src={MonkeyCoin} />
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </SlideContent>
+                <SlideContent>
+                    <Typography variant="h2" sx={{ ...slideTitle }}>
+                        Sharing is Scaling
+                    </Typography>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
+                            <Box sx={{ ...slideImageContainer }}>
+                                <img alt="Routine runner interface example - Minting tokens" src={MonkeyCoin} />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} sm={6} margin="auto">
+                            <Stack direction="column" spacing={2}>
+                                <Typography variant="h5" sx={{ ...slideText }}>
+                                    Use existing routines as building blocks, to create complex processes as quickly as possible.
+                                </Typography>
+                                <Typography variant="h5" sx={{ ...slideText }}>
+                                    Share your work with the community to receive rewards and feedback.
+                                </Typography>
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </SlideContent>
+                <SlideContent>
+                    <Typography variant="h2" sx={{ ...slideTitle }}>
+                        Automate With Minimal Effort
+                    </Typography>
+                </SlideContent>
             </SlideContainerNeon>
-            <Slide id="routine-explanation" sx={{ background: 'transparent', zIndex: 3 }}>
-                <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>How it Works</Typography>
-                <Typography variant="h5" sx={{ ...slideText }}>
-                    Traditional automation tools are not composable - when you create a routine, you can't reuse it in other routines.
-                </Typography>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} margin="auto">
-                        <Stack direction="column" spacing={2}>
-                            <Typography variant="h5" sx={{ ...slideText, textAlign: 'left' }}>
-                                Routines transform entrepreneurship into a process that is:
-                            </Typography>
-                            <ul className='slideList'>
-                                <li>Approachable</li>
-                                <li>Transparent</li>
-                                <li>Automatable</li>
-                            </ul>
-                        </Stack>
-                    </Grid>
-                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
-                        <Box sx={{ ...slideImageContainer }}>
-                            <img alt="Non-descriptive visual work routine" src={BlankRoutine} />
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Slide>
-            <Slide id="auto-generated-interfaces" sx={{ background: 'transparent', zIndex: 3 }}>
-                <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>
-                    Say Goodbye to Endless Browser Tabs
-                    <RotatedBox>👋</RotatedBox>
-                </Typography>
-                <Typography variant="h5" sx={{ ...slideText }}>
-                    Auto-generated interfaces unlock the possibility of performing entire routines without leaving Vrooli
-                </Typography>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} sx={{ paddingLeft: '0 !important' }}>
-                        <Box sx={{ ...slideImageContainer }}>
-                            <img alt="Routine runner interface example - Minting tokens" src={MonkeyCoin} />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6} margin="auto">
-                        <Stack direction="column" spacing={2}>
-                            <Typography variant="h5" sx={{ ...slideText, textAlign: 'left' }}>
-                                Benefits of this approach include:
-                            </Typography>
-                            <ul className='slideList'>
-                                <li>Reduced context switching</li>
-                                <li>Increased focus and organization</li>
-                            </ul>
-                        </Stack>
-                    </Grid>
-                </Grid>
-            </Slide>
-            <Slide id="fund-your-idea" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
-                <Typography variant="h2" sx={{ ...slideTitle }}>
-                    Collaborate, or Fly Solo
-                </Typography>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} margin="auto">
-                        <Typography variant="h5" sx={{ ...slideText }}>
-                            Routines support roles, permissions, and voting - which makes them perfect for replacing business processes.
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} margin="auto">
-                        <Typography variant="h5" sx={{ ...slideText }}>
-                            Hate networking? No problem. Everything you can accomplish in an organization can be done solo.
-                        </Typography>
-                    </Grid>
-                </Grid>
-                <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Start Now</Button>
-                </Stack>
-            </Slide>
-            <Slide id="sky-is-limit" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
+            <Slide id="sky-is-limit" sx={{ color: 'white', background: 'transparent', zIndex: 10 }}>
                 <Typography variant='h2' mb={4} sx={{ ...slideTitle }}>The Sky is the Limit</Typography>
                 <Typography variant="h5" sx={{ ...slideText }}>
-                    Connect routines like building blocks to create more complex routines, which can themselves
-                    be used to create even more complex routines
-                </Typography>
-                <Typography variant="h5" sx={{ ...slideText }}>
-                    Anyone can view, create, run, fork, save, and vote on routines. For FREE! What can we accomplish together?
+                    Our ultimate goal is to transition the world to a fully automated, post-capitalist economy. Here's how:
                 </Typography>
                 <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
                     <Button
@@ -306,20 +269,20 @@ export const HomePage = () => {
                     >Get Started</Button>
                 </Stack>
             </Slide>
-            <Slide id="get-started" sx={{ color: 'white', background: 'transparent', zIndex: 3 }}>
+            <Slide id="get-started" sx={{ color: 'white', background: 'transparent', zIndex: 10 }}>
                 <Typography variant="h2" mb={4} sx={{ ...slideTitle, ...textPop } as CSSProperties}>
                     Ready to Change the World?
                 </Typography>
-                <Typography variant="h5" sx={{ ...slideText }}>
-                    Vrooli is live! Let's change the world together!💙
-                </Typography>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <YoutubeEmbed embedId="Avyeo1f38Aw" width={Math.min(width, 500)} height={Math.min(width, 500) / 1.78} />
-                </Suspense>
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}>Enter Vrooli</Button>
-                    <Button size="large" color="secondary" onClick={() => openLink(setLocation, LANDING_LINKS.Roadmap)}>Roadmap</Button>
-                </Stack>
+                <PulseButton
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => openLink(setLocation, `${APP_URL}${APP_LINKS.Start}`)}
+                    startIcon={<PlayIcon fill='#0fa' />}
+                    sx={{
+                        marginLeft: 'auto !important',
+                        marginRight: 'auto !important',
+                    }}
+                >Start</PulseButton>
             </Slide>
         </SlidePage>
     );
