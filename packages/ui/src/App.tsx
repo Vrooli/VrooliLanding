@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
     BottomNav,
-    Footer,
     Navbar,
 } from 'components';
 import { themes } from 'utils';
@@ -127,7 +126,6 @@ export function App() {
                             <Routes />
                         </Box>
                         <BottomNav />
-                        <Footer />
                     </main>
                 </Box>
             </ThemeProvider>

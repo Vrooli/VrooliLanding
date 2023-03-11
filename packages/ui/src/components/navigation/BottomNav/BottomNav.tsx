@@ -22,7 +22,7 @@ export const BottomNav = () => {
                 // Background starts at 0 opacity, then becomes increases in opacity as the user scrolls down. At 420px, it is fully palette.primary.dark
                 background: 'transparent',
                 position: 'fixed',
-                zIndex: 5,
+                zIndex: 100,
                 bottom: 0,
                 paddingBottom: 'env(safe-area-inset-bottom)',
                 paddingLeft: 'calc(4px + env(safe-area-inset-left))',

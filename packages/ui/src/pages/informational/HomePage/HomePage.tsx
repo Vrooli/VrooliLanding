@@ -1,27 +1,16 @@
 import { Slide } from 'components/slides/Slide/Slide';
 import { Box, Button, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material';
-import BlankRoutine from 'assets/img/blank-routine-1.png';
 import MonkeyCoin from 'assets/img/monkey-coin-page.png';
 import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
 import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { CSSProperties } from '@mui/styled-engine';
 import { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
 import { APP_LINKS, APP_URL, SOCIALS, WHITE_PAPER_URL } from '@shared/consts';
-import { GlossyContainer, PulseButton, SlideContent, SlidePage } from 'components';
-import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
+import { GlossyContainer, PulseButton, SlideContainerNeon, SlideContent, SlidePage } from 'components';
 import { ArticleIcon, DiscordIcon, GitHubIcon, PlayIcon, TwitterIcon } from '@shared/icons';
 import Earth from '../../../assets/img/Earth.svg';
 import { TwinkleStars } from 'components/TwinkleStars/TwinkleStars';
-import { wave } from 'animations';
-
-const RotatedBox = styled("div")({
-    display: 'inline-block',
-    width: 60,
-    height: 60,
-    animation: `${wave} 3s infinite ease`
-});
 
 const greenNeonText = {
     color: '#fff',

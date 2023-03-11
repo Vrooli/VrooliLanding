@@ -1,69 +1,235 @@
-import MattSketch from 'assets/img/thought-sketch-edited-3.png';
-import { Slide } from 'components';
-import { Box, Button, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import MattSketch from 'assets/img/sketch-matt.png';
+import { GlossyContainer, Slide } from 'components';
+import { Box, Button, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { openLink } from 'utils';
 import { useLocation } from '@shared/route';
-import { slideImageContainer, slideText, slideTitle } from 'styles';
-import { SOCIALS } from '@shared/consts';
+import { slideTitle, textPop } from 'styles';
+import { LANDING_LINKS } from '@shared/consts';
+import { useEffect, useMemo } from 'react';
+import { GitHubIcon, HomeIcon, TwitterIcon } from '@shared/icons';
+
+// TODO add everything from footer, since it was removed
+// const contactLinks: [string, string, string, string, SvgComponent][] = [
+//     ['contact-twitter', 'Find us on Twitter', SOCIALS.Twitter, 'Twitter', TwitterIcon],
+//     ['contact-discord', 'Have a question or feedback? Post it on our Discord!', SOCIALS.Discord, 'Join our Discord', DiscordIcon],
+//     ['contact-github', 'Check out the source code, or contribute :)', SOCIALS.GitHub, 'Source Code', GitHubIcon],
+// ]
+
+// const aboutUsLink = LANDING_LINKS.AboutUs
+// const viewStatsLink = `${APP_URL}${APP_LINKS.Stats}`
+
+// export const Footer = () => {
+//     const { palette } = useTheme();
+//     const [, setLocation] = useLocation();
+
+
+//     return (
+//         <Box
+//             display='block'
+//             overflow="hidden"
+//             position="relative"
+//             // safe-area-inset-bottom is the iOS navigation bar
+//             paddingBottom='calc(64px + env(safe-area-inset-bottom))'
+//             sx={{
+//                 backgroundColor: palette.primary.dark,
+//                 color: palette.primary.contrastText,
+//                 zIndex: 10,
+//             }}
+//         >
+//             <Grid container justifyContent='center' spacing={1}>
+//                 <Grid item xs={12} sm={6}>
+//                     <List component="nav">
+//                         <ListItem component="h3" >
+//                             <ListItemText primary="Resources" sx={{ textTransform: 'uppercase' }} />
+//                         </ListItem>
+//                         <ListItem
+//                             component="a"
+//                             href={aboutUsLink}
+//                             onClick={(e) => { e.preventDefault(); openLink(setLocation, aboutUsLink) }}
+//                             sx={{ padding: 2 }}
+//                         >
+//                             <ListItemIcon>
+//                                 <InfoIcon fill={palette.primary.contrastText} />
+//                             </ListItemIcon>
+//                             <ListItemText primary="About Us" sx={{ color: palette.primary.contrastText }} />
+//                         </ListItem>
+//                         <ListItem
+//                             component="a"
+//                             href={viewStatsLink}
+//                             onClick={(e) => { e.preventDefault(); openLink(setLocation, viewStatsLink) }}
+//                             sx={{ padding: 2 }}
+//                         >
+//                             <ListItemIcon>
+//                                 <StatsIcon fill={palette.primary.contrastText} />
+//                             </ListItemIcon>
+//                             <ListItemText primary="View Stats" sx={{ color: palette.primary.contrastText }} />
+//                         </ListItem>
+//                     </List>
+//                 </Grid>
+//                 <Grid item xs={12} sm={6}>
+//                     <List component="nav">
+//                         <ListItem component="h3" >
+//                             <ListItemText primary="Contact" sx={{ textTransform: 'uppercase' }} />
+//                         </ListItem>
+//                         {contactLinks.map(([label, tooltip, src, text, Icon], key) => (
+//                             <Tooltip key={key} title={tooltip} placement="left">
+//                                 <ListItem
+//                                     aria-label={label}
+//                                     component="a"
+//                                     href={src}
+//                                     onClick={(e) => { e.preventDefault(); openLink(setLocation, src) }}
+//                                     sx={{ padding: 2 }}
+//                                 >
+//                                     <ListItemIcon>
+//                                         <Icon fill={palette.primary.contrastText} />
+//                                     </ListItemIcon>
+//                                     <ListItemText primary={text} sx={{ color: palette.primary.contrastText }} />
+//                                 </ListItem>
+//                             </Tooltip>
+//                         ))}
+//                     </List>
+//                 </Grid>
+//             </Grid>
+//             <CopyrightBreadcrumbs sx={{ color: palette.primary.contrastText }} />
+//         </Box>
+//     );
+// }
+
+type MemberData = {
+    fullName: string;
+    role: string;
+    photo: string;
+    socials: {
+        website?: string;
+        twitter?: string;
+        github?: string;
+    }
+}
+
+const memberButtonProps = {
+    background: 'transparent',
+    border: '0',
+    '&:hover': {
+        background: 'transparent',
+        filter: 'brightness(1.2)',
+        transform: 'scale(1.2)',
+    },
+    transition: 'all 0.2s ease',
+}
+
+const teamMembers: MemberData[] = [
+    {
+        fullName: 'Matt Halloran',
+        role: 'Leader/developer',
+        photo: MattSketch,
+        socials: {
+            website: 'https://matthalloran.info',
+            twitter: 'https://twitter.com/mdhalloran',
+            github: 'https://github.com/MattHalloran',
+        }
+    },
+]
 
 export const AboutUsPage = () => {
     const [, setLocation] = useLocation();
+
+    // Intersection observer for fade in of member cards
+    const observer = useMemo(() => new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            } else {
+                entry.target.classList.remove('show');
+            }
+        })
+    }), []);
+    useEffect(() => {
+        const roadmapSections = document.querySelectorAll('.hidden');
+        roadmapSections.forEach(section => {
+            observer.observe(section);
+        }
+        )
+    }, [observer])
+
     return (
         <Box id="page">
-            <Slide id="about-the-team" sx={{ background: "fixed radial-gradient(circle, rgba(208,213,226,1) 7%, rgba(179,191,217,1) 66%, rgba(160,188,249,1) 94%)" }}>
-                <Typography variant='h2' component="h1" pb={4} sx={{...slideTitle}}>About the Team</Typography>
-                <Typography variant="h4" margin='auto' textAlign="left" sx={{
-                    fontSize: { xs: '1.5rem', sm: '1.75rem' },
-                    color: "#247406",
-                    fontWeight: "600"
-                }}>
-                    Leader/Developer - Matt Halloran
-                </Typography>
-                <Typography variant="h5" sx={{...slideText}}>
-                    Matt is a 24-year-old with a life-long passion for contemplating the future.
-                    He is very detail-oriented, and spends a considerable (arguably too much) amount of time examining our best
-                    chances for surviving the Great Filter. These thoughts led him to start Vrooli, in hopes that
-                    the platform will significantly accelerate humanity's rate of progress - empowering us to solve our most pressing
-                    problems before it is too late.
-                </Typography>
-                <Grid container spacing={2} pb={2}>
-                    <Grid item xs={12} sm={6}>
-                        <ul className='slideList'>
-                            <li>Bachelors in Computer Science, 3.85 GPA</li>
-                            <li>Plutus Pioneers 1st Cohort graduate</li>
-                            <li>💻 Developer 🤔 Philosopher 💭 Dreamer</li>
-                        </ul>
-                    </Grid>
-                    <Grid item xs={12} sm={6} sx={{paddingLeft: '0 !important'}}>
-                        <Box sx={{ ...slideImageContainer }}>
-                            <img alt="Illustrated drawing of the founder of Vrooli - Matt Halloran" src={MattSketch} />
-                        </Box>
-                    </Grid>
-                </Grid>
-                <Stack direction="row" spacing={2} pb={4} justifyContent="center" alignItems="center">
-                    <Tooltip title="See Matt's other projects" placement="bottom">
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, 'https://github.com/MattHalloran')} sx={{ height: '100%' }}>Other Projects</Button>
-                    </Tooltip>
-                    <Tooltip title="Contact Matt" placement="bottom">
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, 'https://matthalloran.info')} sx={{ height: '100%' }}>Contact / Support</Button>
-                    </Tooltip>
+            <Slide id="about-the-team" sx={{
+                background: 'radial-gradient(circle, rgb(6 6 46) 12%, rgb(1 1 36) 52%, rgb(3 3 20) 80%)',
+                paddingTop: '10vh',
+            }}>
+                <Typography variant='h2' component="h1" pb={4} sx={{ ...slideTitle }}>The Team</Typography>
+                {/* Vertical stack of cards, one for each member */}
+                <Stack id="members-stack" direction="column" spacing={10}>
+                    {teamMembers.map((member, key) => (
+                        <GlossyContainer className="hidden" sx={{
+                            opacity: 0,
+                            height: '300px',
+                        }}>
+                            {/* Image, positioned to left */}
+                            <Box component="img" src={member.photo} alt={`${member.fullName} sketch`} sx={{
+                                maxWidth: 'min(300px, 50%)',
+                                maxHeight: '100%',
+                                objectFit: 'contain',
+                                position: 'absolute',
+                                left: '0',
+                                top: '0',
+                                bottom: '0',
+                                margin: 'auto',
+                                filter: 'brightness(3)',
+                            }} />
+                            {/* Name, role, and links */}
+                            <Box sx={{
+                                position: 'absolute',
+                                right: '0',
+                                top: '0',
+                                bottom: '0',
+                                margin: 'auto',
+                                width: 'min(300px, 50%)',
+                                height: 'fit-content',
+                            }}>
+                                <Typography variant='h4' mb={1} sx={{ ...textPop }}>{member.fullName}</Typography>
+                                <Typography variant='h6' mb={2} sx={{ ...textPop }}>{member.role}</Typography>
+                                <Stack direction="row" alignItems="center" justifyContent="center">
+                                    {member.socials.website && (
+                                        <Tooltip title="Personal website" placement="bottom">
+                                            <IconButton onClick={() => openLink(setLocation, member.socials.website as string)} sx={memberButtonProps}>
+                                                <HomeIcon fill='#0fa' width="50px" height="50px" />
+                                            </IconButton>
+                                        </Tooltip>
+                                    )}
+                                    {member.socials.twitter && (
+                                        <Tooltip title="Twitter" placement="bottom">
+                                            <IconButton onClick={() => openLink(setLocation, member.socials.twitter as string)} sx={memberButtonProps}>
+                                                <TwitterIcon fill='#0fa' width="42px" height="42px" />
+                                            </IconButton>
+                                        </Tooltip>
+                                    )}
+                                    {member.socials.github && (
+                                        <Tooltip title="GitHub" placement="bottom">
+                                            <IconButton onClick={() => openLink(setLocation, member.socials.github as string)} sx={memberButtonProps}>
+                                                <GitHubIcon fill='#0fa' width="42px" height="42px" />
+                                            </IconButton>
+                                        </Tooltip>
+                                    )}
+                                </Stack>
+                            </Box>
+                        </GlossyContainer>
+                    ))}
+                    <Stack direction="row" justifyContent="center" alignItems="center" pt={4} spacing={2}>
+                        <Button
+                            size="large"
+                            color="secondary"
+                            href={LANDING_LINKS.Contribute}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                openLink(setLocation, LANDING_LINKS.Contribute);
+                            }}
+                        >Join the Team</Button>
+                    </Stack>
                 </Stack>
-                <Typography variant="h4" margin='auto' textAlign="left" sx={{
-                    fontSize: { xs: '1.5rem', sm: '1.75rem' },
-                    color: "#247406",
-                    fontWeight: "600"
-                }}>
-                    Other Team Members - Possibly YOU!
-                </Typography>
-                <Typography variant="h5" sx={{...slideText}}>
-                    Vrooli has a bright future ahead, but we need all hands on deck! If you are interested
-                    in contributing in any way, don't hesitate to reach out to us!
-                </Typography>
-                <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Tooltip title="Become part of our Discord community" placement="bottom">
-                        <Button size="large" color="secondary" onClick={() => openLink(setLocation, SOCIALS.Discord)}>Join Us</Button>
-                    </Tooltip>
-                </Stack>
+                {/* <Box sx={{ ...slideImageContainer }}>
+                    <img alt="Illustrated drawing of the founder of Vrooli - Matt Halloran" src={MattSketch} />
+                </Box> */}
             </Slide>
         </Box>
     );

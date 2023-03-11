@@ -4,10 +4,9 @@ import Target from 'assets/img/target.webp';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { slideImageContainer, slideText, slideTitle, textPop } from 'styles';
 import { useLocation } from '@shared/route';
-import { GlossyContainer, PulseButton, Slide, SlideContainer, SlideContent } from 'components';
+import { GlossyContainer, PulseButton, Slide, SlideContainer, SlideContainerNeon, SlideContent } from 'components';
 import { APP_LINKS, APP_URL, WHITE_PAPER_URL } from '@shared/consts';
 import { useEffect, useMemo } from 'react';
-import { SlideContainerNeon } from 'components/slides/SlideContainerNeon/SlideContainerNeon';
 import { ArticleIcon, PlayIcon } from '@shared/icons';
 
 export const FeaturesPage = () => {
