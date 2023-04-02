@@ -1,0 +1,71 @@
+{
+    "name": "ui",
+    "author": "Vrooli",
+    "license": "GPL-3.0",
+    "version": "2.0.0",
+    "main": "index.ts",
+    "type": "module",
+    "private": true,
+    "dependencies": {
+        "@emotion/react": "^11.9.0",
+        "@emotion/styled": "^11.8.1",
+        "@mui/material": "^5.6.1",
+        "@mui/styles": "^5.6.1",
+        "@shared/consts": "*",
+        "@shared/icons": "*",
+        "@shared/route": "*",
+        "lodash": "^4.17.21",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "react-lazily": "^0.9.0",
+        "react-markdown": "^7.0.1",
+        "react-scripts": "^4.0.1",
+        "react-tsparticles": "^1.39.1",
+        "remove": "^0.1.5",
+        "typescript": "^4.6.3",
+        "web-vitals": "^2.1.0",
+        "workbox-background-sync": "^6.3.0",
+        "workbox-broadcast-update": "^6.3.0",
+        "workbox-cacheable-response": "^6.3.0",
+        "workbox-core": "^6.3.0",
+        "workbox-expiration": "^6.3.0",
+        "workbox-google-analytics": "^6.3.0",
+        "workbox-navigation-preload": "^6.3.0",
+        "workbox-precaching": "^6.3.0",
+        "workbox-range-requests": "^6.3.0",
+        "workbox-routing": "^6.3.0",
+        "workbox-strategies": "^6.3.0",
+        "workbox-streams": "^6.3.0"
+    },
+    "scripts": {
+        "build": "react-scripts build",
+        "start-development": "PORT=3069 react-scripts --max_old_space_size=8128 start",
+        "start-production": "PORT=3069 serve -s build -l 3069",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "analyze": "source-map-explorer build/static/js/*"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/jest": "^27.0.2",
+        "@types/node": "^16.10.4",
+        "@types/pubsub-js": "^1.8.3",
+        "@types/react": "^17.0.29",
+        "@types/react-dom": "^17.0.9",
+        "chai": "^4.3.4",
+        "eslint-plugin-react": "^7.24.0",
+        "mocha": "^9.1.1",
+        "source-map-explorer": "^2.5.2"
+    }
+}
